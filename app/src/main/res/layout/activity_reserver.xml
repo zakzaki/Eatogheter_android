@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_reserver_frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Reserver">
+
+
+    <TextView
+        android:id="@+id/reserver_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Réserver un créneau"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/reserver_date_txt_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Selectionner la date"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_below="@+id/reserver_txt"
+        />
+
+    <TextView
+        android:id="@+id/reserver_heure_txt_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Selectionner l'heure"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_below="@+id/reserver_date_txt_view"
+        />
+
+    <Button
+        android:id="@+id/reserver_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Créer un RDV"
+        android:layout_below="@+id/reserver_heure_txt_view"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

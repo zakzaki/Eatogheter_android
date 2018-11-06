@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Reservation_adapter">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+
+        <TextView
+            android:id="@+id/activity_reservation_adapter_nom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom Resto"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/activity_reservation_adapter_adress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_reservation_adapter_nom"
+            android:text="Adress Resto" />
+
+
+        <TextView
+            android:id="@+id/activity_reservation_adapter_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/activity_reservation_adapter_nom"
+            android:text="Date"
+            android:layout_marginLeft="30dp"
+
+            />
+
+        <TextView
+            android:id="@+id/activity_reservation_adapter_heure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/activity_reservation_adapter_nom"
+            android:layout_below="@+id/activity_reservation_adapter_date"
+            android:text="Heure"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+
+            />
+
+        <Button
+            android:id="@+id/reservation_adapter_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:text="Rejoindre" />
+        <Button
+            android:id="@+id/reservation_adapter__voir_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:layout_below="@+id/reservation_adapter_btn"
+            android:text="Les participants" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

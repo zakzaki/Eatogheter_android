@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Inscription"
+    android:background="@drawable/img_0000_layout"
+    >
+
+    <EditText
+        android:id="@+id/activity_inscription_mail"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/activity_inscription_nom"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_inscription_mail"
+        android:hint="Nom" />
+
+    <EditText
+        android:id="@+id/activity_inscription_prenom"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_inscription_nom"
+        android:hint="Prenom" />
+
+    <EditText
+        android:id="@+id/activity_inscription_age"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_inscription_prenom"
+        android:hint="Age" />
+
+    <EditText
+        android:id="@+id/activity_inscription_pseudo"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_inscription_age"
+        android:hint="Pseudo" />
+
+    <EditText
+        android:id="@+id/activity_inscription_password_txt"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_inscription_pseudo"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/activity_inscription_cnx_btn"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/activity_inscription_password_txt"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/img_0001s_0001_btn"
+        android:text="S'inscrire"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+         />
+
+
+</RelativeLayout>

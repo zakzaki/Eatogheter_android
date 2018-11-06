@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "51471052637",
+    "firebase_url": "https://eatogheter-2ebf3.firebaseio.com",
+    "project_id": "eatogheter-2ebf3",
+    "storage_bucket": "eatogheter-2ebf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51471052637:android:777ee1854240bc7f",
+        "android_client_info": {
+          "package_name": "com.example.zak.eatogheter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51471052637-jvl513bsm42tci4dessvonq85een4th9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlHuigfMG8HWPnJl0jlbgHew8gZW2c9mI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
