@@ -26,7 +26,8 @@
         <activity android:name=".Reservation" />
         <activity android:name=".Reserver" />
         <activity android:name=".Reservation_adapter" />
-        <activity android:name=".Navigation"></activity>
+        <activity android:name=".Navigation" />
+        <activity android:name=".Incruster"></activity>
     </application>
 
 </manifest>

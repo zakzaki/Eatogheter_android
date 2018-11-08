@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,26 +26,26 @@ import java.util.Set;
 import Model.Reponse_requete;
 import Model.Reservation_model;
 
-public class Reservation extends AppCompatActivity {
+public class Reservation extends Base_fragment {
 
     private FirebaseAuth mAuth;
     String TAG="D";
 
     private ListView m_lv;
     private Reservation_adapter adapter;
-    Context context;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservation);
+    public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
 
-        context=this;
-        m_lv=findViewById(R.id.activity_reservation_list_view);
+        View view=inflater.inflate(R.layout.activity_resultat,view_group,false);
+
+
+        m_lv=view.findViewById(R.id.activity_reservation_list_view);
 
         read_reservation();
 
-
+return  view;
     }
 
 
@@ -86,8 +89,8 @@ public class Reservation extends AppCompatActivity {
                     }
                 }
 
-                adapter=new Reservation_adapter(context,R.layout.activity_reservation_adapter,list_reservation);
-                m_lv.setAdapter(adapter);
+             //   adapter=new Reservation_adapter(getActivity(),R.layout.activity_reservation_adapter,list_reservation);
+            //    m_lv.setAdapter(adapter);
             }
 
             @Override
@@ -97,5 +100,10 @@ public class Reservation extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        return false;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.zak.eatogheter;
 
-import android.content.Intent;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +16,7 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
         Recherche res = new Recherche();
 
 
-       android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+       fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, res).commit();
     }
 
@@ -39,25 +40,33 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        Intent intent;
 
         // 4 - Handle Navigation Item Click
         int id = item.getItemId();
-
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         switch (id){
             case R.id.activity_main_drawer_news :
-                intent = new Intent(this, Recherche.class);
-                startActivity(intent);
+               /* intent = new Intent(this, Recherche.class);
+                startActivity(intent);*/
+               Recherche recherche = new Recherche();
+
+
+                fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, recherche).commit();
+
                 break;
 
             case R.id.activity_main_drawer_profile:
                 break;
 
             case R.id.activity_main_drawer_reservations:
-                super.onBackPressed();
+                Reservation reservation =new Reservation();
+
+                fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, reservation).commit();
+
                 break;
 
             case R.id.activity_main_drawer_mes_reservations:
+
 
 
                 break;

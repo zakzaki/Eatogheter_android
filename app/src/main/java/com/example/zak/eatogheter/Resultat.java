@@ -2,9 +2,12 @@ package com.example.zak.eatogheter;
 
 import android.os.Bundle;
 
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,10 +27,28 @@ public class Resultat extends Base_fragment{
 
         final ArrayList<Reponse_requete>resultat = (ArrayList<Reponse_requete>) getArguments().getSerializable("resultat");
 
-        adapter = new Resultat_adapter(getActivity(),R.layout.activity_resultat_adapter,resultat);
+        adapter = new Resultat_adapter(getActivity(),resultat);
         m_lv=view.findViewById(R.id.activity_resultat_list_view);
 
         m_lv.setAdapter(adapter);
+
+        m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("LOG","JE SUIIISSSS LAAAAAA ");
+                Reponse_requete reponse_requete=(Reponse_requete)parent.getItemAtPosition(position);
+
+                Reserver reserver=new Reserver();
+
+                Bundle args = new Bundle();
+                args.putSerializable("resto2", reponse_requete);
+                reserver.setArguments(args);
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.dynamic_fragment_frame_layout, reserver);
+                transaction.commit();
+            }
+        });
 
 return view;
     }

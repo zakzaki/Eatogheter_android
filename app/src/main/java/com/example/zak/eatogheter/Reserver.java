@@ -1,13 +1,17 @@
 package com.example.zak.eatogheter;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -27,25 +31,28 @@ import Model.Reservation_model;
 import Model.Restaurant;
 
 
-public class Reserver extends AppCompatActivity{
+public class Reserver extends Base_fragment{
 
     DatePickerDialog.OnDateSetListener m_date;
     TimePickerDialog.OnTimeSetListener m_heure;
-    Button m_btn;
+    Button m_btn, m_btn_date, m_btn_heure;
     TextView m_tv_date, m_tv_heure;
     String TAG="D";
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserver);
+    public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
+
+        View view=inflater.inflate(R.layout.activity_reserver,view_group,false);
 
 
-        m_btn=findViewById(R.id.reserver_btn);
+        m_btn=view.findViewById(R.id.reserver_btn);
+        m_btn_date=view.findViewById(R.id.reserver_btn_date);
+        m_btn_heure=view.findViewById(R.id.reserver_btn_heure);
 
-        m_tv_date=findViewById(R.id.reserver_date_txt_view);
-        m_tv_heure=findViewById(R.id.reserver_heure_txt_view);
+        m_tv_date=view.findViewById(R.id.reserver_date_txt_view);
+        m_tv_heure=view.findViewById(R.id.reserver_heure_txt_view);
+
 
         m_tv_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,20 +62,29 @@ public class Reserver extends AppCompatActivity{
                 int month =cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(Reserver.this,android.R.style.Theme_Black,m_date,year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+               // DatePickerDialog dialog = new DatePickerDialog(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_DARK,m_date,year,month,day);
+              //  dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+              //  dialog.show();
+
+                DialogFragment dialog = new DialogFragment();
+                dialog.show(getFragmentManager(),"Date");
+
+                Log.d("GGGGGGG ","DATE!!!!!!!!!!");
+
+
+                m_date=new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Log.d("GGGGGGG ","DDDDDDDDDAAAAAAAAAAAAAATE");
+                        month=month+1;
+                        String date=dayOfMonth +"/"+month+"/"+year;
+                        m_tv_date.setText(date);
+                    }
+                };
             }
         });
 
-        m_date=new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month=month+1;
-                String date=dayOfMonth +"/"+month+"/"+year;
-                m_tv_date.setText(date);
-            }
-        };
+
 
         m_tv_heure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,32 +93,38 @@ public class Reserver extends AppCompatActivity{
                 int hour=cal.get(Calendar.HOUR_OF_DAY);
                 int minute=cal.get(Calendar.MINUTE);
 
-                TimePickerDialog dialog = new TimePickerDialog(Reserver.this,android.R.style.Theme_Black,m_heure,hour,minute,true);
+                TimePickerDialog dialog = new TimePickerDialog(getActivity(),android.R.style.Theme_Black,m_heure,hour,minute,true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
+                Log.d("GGGGGGG ","HEURE!!!!!!!!!!!!!!!");
+
+
+                m_heure=new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        Log.d("HHHHH ","HEUUUUUUUUUUUUUUUUUUUUUUUUURE");
+                        String date=hourOfDay +":"+minute;
+                        m_tv_heure.setText(date);
+                    }
+                };
             }
         });
 
-        m_heure=new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String date=hourOfDay +":"+minute;
-                m_tv_heure.setText(date);
-            }
-        };
 
 
 
 
-        m_btn.setOnClickListener(new View.OnClickListener() {
 
-            Reponse_requete rep=(Reponse_requete) getIntent().getSerializableExtra("resto");
+       m_btn.setOnClickListener(new View.OnClickListener() {
 
+         //   Reponse_requete rep=(Reponse_requete) getIntent().getSerializableExtra("resto");
 
             @Override
             public void onClick(View v) {
 
+                Reponse_requete rep = (Reponse_requete) getArguments().getSerializable("resto2");
                 try{
+
                 FirebaseAuth mAuth;
 
                 mAuth = FirebaseAuth.getInstance();
@@ -124,17 +146,19 @@ public class Reserver extends AppCompatActivity{
                 mDatabase.child("reservations").child(key).setValue(restaurant);
 
                     refreshitem();
-                    Toast.makeText(Reserver.this, "RESERVATION REUSSIE",
+                    Toast.makeText(getActivity(), "RESERVATION REUSSIE",
                             Toast.LENGTH_LONG).show();
 
             }catch(Exception e){
-                    Toast.makeText(Reserver.this, "ERREUR LORS DE LA RESERVATION! REESSAYER",
+                    Toast.makeText(getActivity(), "ERREUR LORS DE LA RESERVATION! REESSAYER",
                             Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                     refreshitem();
                 }
             }
         });
+
+        return view;
     }
 
     public void refreshitem(){

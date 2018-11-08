@@ -1,6 +1,8 @@
 package Model;
 
-public class Reponse_requete implements java.io.Serializable {
+import java.io.Serializable;
+
+public class Reponse_requete implements Serializable {
 
     private String id;
     private String nom;
