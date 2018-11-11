@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public class User implements Serializable {
 
     private String id;
     private String nom;

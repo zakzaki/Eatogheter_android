@@ -46,12 +46,8 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         switch (id){
             case R.id.activity_main_drawer_news :
-               /* intent = new Intent(this, Recherche.class);
-                startActivity(intent);*/
                Recherche recherche = new Recherche();
-
-
-                fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, recherche).commit();
+               fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, recherche).commit();
 
                 break;
 
@@ -60,14 +56,14 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
 
             case R.id.activity_main_drawer_reservations:
                 Reservation reservation =new Reservation();
-
                 fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, reservation).commit();
 
                 break;
 
             case R.id.activity_main_drawer_mes_reservations:
 
-
+                Mes_reservations mes_reservations= new Mes_reservations();
+                fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();
 
                 break;
 

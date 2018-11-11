@@ -1,13 +1,23 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Reservation_model implements java.io.Serializable {
+public class Reservation_model implements Serializable {
 
+    private String key;
     private Reponse_requete r;
     private String date;
     private String heure;
     private ArrayList<String>users;
+
+    public Reservation_model(String key, Reponse_requete r, String date, String heure, ArrayList<String> users) {
+        this.key=key;
+        this.r = r;
+        this.date = date;
+        this.heure = heure;
+        this.users = users;
+    }
 
     public Reservation_model(Reponse_requete r, String date, String heure, ArrayList<String> users) {
         this.r = r;
@@ -23,6 +33,14 @@ public class Reservation_model implements java.io.Serializable {
     }
 
     public Reservation_model() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Reponse_requete getR() {

@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,7 +55,7 @@ public class Reserver extends Base_fragment{
         m_tv_heure=view.findViewById(R.id.reserver_heure_txt_view);
 
 
-        m_tv_date.setOnClickListener(new View.OnClickListener() {
+        m_btn_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar cal=Calendar.getInstance();
@@ -86,7 +87,7 @@ public class Reserver extends Base_fragment{
 
 
 
-        m_tv_heure.setOnClickListener(new View.OnClickListener() {
+        m_btn_heure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar cal=Calendar.getInstance();
@@ -145,9 +146,18 @@ public class Reserver extends Base_fragment{
                 Log.d(TAG, "LA KEEEEEEY EST " + key);
                 mDatabase.child("reservations").child(key).setValue(restaurant);
 
-                    refreshitem();
+
                     Toast.makeText(getActivity(), "RESERVATION REUSSIE",
                             Toast.LENGTH_LONG).show();
+                    Recherche recherche = new Recherche();
+
+                    Bundle args = new Bundle();
+                    recherche.setArguments(args);
+
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.dynamic_fragment_frame_layout, recherche);
+                    transaction.commit();
+
 
             }catch(Exception e){
                     Toast.makeText(getActivity(), "ERREUR LORS DE LA RESERVATION! REESSAYER",

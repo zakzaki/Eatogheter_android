@@ -98,7 +98,7 @@ public class Inscription extends AppCompatActivity {
                                     try{
                                         inserer_info(u);
 
-                                        Intent intent = new Intent(Inscription.this, Recherche.class);
+                                        Intent intent = new Intent(Inscription.this, MainActivity.class);
                                         startActivity(intent);
 
                                     }catch (Exception e){

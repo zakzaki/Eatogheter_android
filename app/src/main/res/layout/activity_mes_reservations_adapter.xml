@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Mes_reservations_adapter">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+
+            <TextView
+                android:id="@+id/activity_mes_reservation_adapter_nom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom Resto"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/activity_mes_reservation_adapter_adress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/activity_mes_reservation_adapter_nom"
+                android:layout_marginTop="30dp"
+                android:text="Adress Resto" />
+
+
+            <TextView
+                android:id="@+id/activity_mes_reservation_adapter_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/activity_mes_reservation_adapter_nom"
+                android:text="Date"
+                android:layout_marginLeft="30dp"
+
+                />
+
+            <TextView
+                android:id="@+id/activity_mes_reservation_adapter_heure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/activity_mes_reservation_adapter_nom"
+                android:layout_below="@+id/activity_reservation_adapter_date"
+                android:text="Heure"
+                android:layout_margin="30dp"
+
+                />
+
+            <Button
+                android:id="@+id/mes_reservation_adapter_btn_modifier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="10dp"
+                android:text="Modifier" />
+
+            <Button
+                android:id="@+id/mes_reservation_adapter_btn_supprimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/mes_reservation_adapter_btn_modifier"
+                android:padding="10dp"
+                android:layout_toLeftOf="@+id/mes_reservation_adapter_btn_modifier"
+                android:text="Supprimer" />
+            <Button
+                android:id="@+id/mes_reservation_adapter_voir_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:padding="10dp"
+                android:layout_below="@+id/mes_reservation_adapter_btn_supprimer"
+                android:text="Les participants" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
