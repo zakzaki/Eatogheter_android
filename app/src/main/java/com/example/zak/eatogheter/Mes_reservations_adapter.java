@@ -1,8 +1,10 @@
 package com.example.zak.eatogheter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +44,7 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
 
         m_modifier=convertView.findViewById(R.id.mes_reservation_adapter_btn_modifier);
         m_supprimer=convertView.findViewById(R.id.mes_reservation_adapter_btn_supprimer);
-        m_voir=convertView.findViewById(R.id.mes_reservation_adapter_voir_btn);
+      //  m_voir=convertView.findViewById(R.id.mes_reservation_adapter_voir_btn);
 
         final Reservation_model res=getItem(position);
 
@@ -50,6 +52,8 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
         m_adresse.setText(res.getR().getAdresse());
         m_date.setText(res.getDate());
         m_heure.setText(res.getHeure());
+
+
 
         return convertView;
     }

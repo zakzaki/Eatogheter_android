@@ -97,6 +97,8 @@ public class Reservation_adapter extends ArrayAdapter<Reservation_model> {
             @Override
             public void onClick(View v) {
 
+
+
             }
         });
 

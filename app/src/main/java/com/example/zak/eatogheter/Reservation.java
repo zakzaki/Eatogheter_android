@@ -1,8 +1,6 @@
 package com.example.zak.eatogheter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +38,6 @@ public class Reservation extends Base_fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.activity_reservation,view_group,false);
-
-
         m_lv=view.findViewById(R.id.activity_reservation_list_view);
 
         read_reservation();
@@ -64,7 +60,6 @@ return  view;
                 if (dataSnapshot != null) {
                     HashMap value = (HashMap) dataSnapshot.getValue();
                     if (value != null) {
-                        int i = 0;
                         Set cles = value.keySet();
                         Iterator it = cles.iterator();
 

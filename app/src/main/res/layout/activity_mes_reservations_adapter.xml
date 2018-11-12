@@ -29,7 +29,10 @@
                 android:layout_height="wrap_content"
                 android:text="Nom Resto"
                 android:textSize="25dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
 
             <TextView
                 android:id="@+id/activity_mes_reservation_adapter_adress"
@@ -37,7 +40,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activity_mes_reservation_adapter_nom"
                 android:layout_marginTop="30dp"
-                android:text="Adress Resto" />
+                android:text="Adress Resto"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
 
 
             <TextView
@@ -47,7 +53,8 @@
                 android:layout_toRightOf="@+id/activity_mes_reservation_adapter_nom"
                 android:text="Date"
                 android:layout_marginLeft="30dp"
-
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 />
 
             <TextView
@@ -58,7 +65,8 @@
                 android:layout_below="@+id/activity_reservation_adapter_date"
                 android:text="Heure"
                 android:layout_margin="30dp"
-
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 />
 
             <Button
@@ -67,7 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:padding="10dp"
-                android:text="Modifier" />
+                android:text="Modifier"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
 
             <Button
                 android:id="@+id/mes_reservation_adapter_btn_supprimer"
@@ -77,15 +88,11 @@
                 android:layout_below="@+id/mes_reservation_adapter_btn_modifier"
                 android:padding="10dp"
                 android:layout_toLeftOf="@+id/mes_reservation_adapter_btn_modifier"
-                android:text="Supprimer" />
-            <Button
-                android:id="@+id/mes_reservation_adapter_voir_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:padding="10dp"
-                android:layout_below="@+id/mes_reservation_adapter_btn_supprimer"
-                android:text="Les participants" />
+                android:text="Supprimer"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
+
 
         </RelativeLayout>
 

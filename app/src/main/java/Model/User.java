@@ -14,6 +14,14 @@ public class User implements Serializable {
 
     public User(String nom, String prenom, String age, String pseudo){
 
+        this.nom=nom;
+        this.prenom=prenom;
+        this.age=age;
+        this.pseudo=pseudo;
+    }
+
+    public User(String id,String nom, String prenom, String age, String pseudo){
+
         this.id=id;
         this.nom=nom;
         this.prenom=prenom;

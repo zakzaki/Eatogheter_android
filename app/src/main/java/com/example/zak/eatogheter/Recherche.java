@@ -63,8 +63,6 @@ public class Recherche extends Base_fragment{
 
         View view=inflater.inflate(R.layout.activity_recherche,view_group,false);
 
-
-
         m_edit_txt_localisation= view.findViewById(R.id.activity_recherche_edit_localisation);
         m_edit_txt_mot_cle= view.findViewById(R.id.activity_recherche_edit_mot_cle);
         m_edit_txt_rayon = view.findViewById(R.id.activity_recherche_edit_rayon);
@@ -95,9 +93,7 @@ public class Recherche extends Base_fragment{
         m_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 get_resultat();
-
             }
         });
 
@@ -150,11 +146,6 @@ return view;
 
                             }
 
-                          /*  Intent intent = new Intent(getActivity(), Resultat.class);
-                            intent.putExtra("resultat", reponse2);
-                            startActivity(intent);*/
-
-
                             Resultat res = new Resultat();
 
                             Bundle args = new Bundle();
@@ -164,9 +155,6 @@ return view;
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
                             transaction.replace(R.id.dynamic_fragment_frame_layout, res);
                             transaction.commit();
-
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -183,9 +171,6 @@ return view;
             }
         });
         requestQueue.add(jsonobjet);
-      //  Log.d(TAG, "le size est "+reponse_f.size());
-
-
     }
 
 
