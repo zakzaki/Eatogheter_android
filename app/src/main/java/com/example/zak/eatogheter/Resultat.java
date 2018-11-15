@@ -1,5 +1,4 @@
 package com.example.zak.eatogheter;
-
 import android.os.Bundle;
 
 import android.support.v4.app.FragmentTransaction;
@@ -20,12 +19,23 @@ public class Resultat extends Base_fragment{
     private Resultat_adapter adapter;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
 
+
+
+
         View view=inflater.inflate(R.layout.activity_resultat,view_group,false);
 
-        final ArrayList<Reponse_requete>resultat = (ArrayList<Reponse_requete>) getArguments().getSerializable("resultat");
+        final ArrayList<Reponse_requete>resultat;
+    //    resultat= (ArrayList<Reponse_requete>) getArguments().getSerializable("resultat");
+
+        if((ArrayList<Reponse_requete>) getArguments().getSerializable("resultat")!=null)
+            resultat=(ArrayList<Reponse_requete>) getArguments().getSerializable("resultat");
+        else  resultat= (ArrayList<Reponse_requete>) getArguments().getSerializable("retour_resultat");
+
+        Log.d("h","RESULTAAAAAAAAT == "+resultat.toString());
 
         adapter = new Resultat_adapter(getActivity(),resultat);
         m_lv=view.findViewById(R.id.activity_resultat_list_view);
@@ -38,10 +48,15 @@ public class Resultat extends Base_fragment{
                 Log.d("LOG","JE SUIIISSSS LAAAAAA ");
                 Reponse_requete reponse_requete=(Reponse_requete)parent.getItemAtPosition(position);
 
+
+               // SharedPreferences editor = getSharedPreferences("param", 0);
+               // editor.putBoolean("jj", true);
+
                 Reserver reserver=new Reserver();
 
                 Bundle args = new Bundle();
                 args.putSerializable("resto2", reponse_requete);
+                args.putSerializable("retour_resultat", resultat);
                 reserver.setArguments(args);
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -56,7 +71,18 @@ return view;
 
     @Override
     public boolean onBackPressed() {
-      return false;
+
+        Log.d("HH","RETOUUUUUUUUUUR RES");
+        Recherche recherche=new Recherche();
+
+        Bundle args = new Bundle();
+        recherche.setArguments(args);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.dynamic_fragment_frame_layout, recherche);
+        transaction.commit();
+
+        return false;
     }
 
 

@@ -29,16 +29,6 @@
         android:textSize="30dp"
         android:layout_below="@+id/reserver_txt"
         />
-    <Button
-        android:id="@+id/reserver_btn_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/reserver_date_txt_view"
-        android:layout_below="@+id/reserver_txt"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginLeft="10dp"
-        />
 
     <TextView
         android:id="@+id/reserver_heure_txt_view"
@@ -49,16 +39,6 @@
         android:textStyle="bold"
         android:textSize="30dp"
         android:layout_below="@+id/reserver_date_txt_view"
-        />
-    <Button
-        android:id="@+id/reserver_btn_heure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/reserver_heure_txt_view"
-        android:layout_below="@+id/reserver_btn_date"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginLeft="10dp"
         />
 
     <Button

@@ -2,6 +2,8 @@ package com.example.zak.eatogheter;
 
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ public class Users_list extends Base_fragment {
 
     private ListView m_lv;
     private Users_adapter adapter;
+    private String provenance;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
@@ -48,6 +51,8 @@ public class Users_list extends Base_fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<User> list_users = new ArrayList<>();
                 ArrayList<String>users=(ArrayList<String>)getArguments().getSerializable("users");
+                provenance=getArguments().getString("provenance");
+                if(provenance==null) provenance="";
 
                 try {
                     if (dataSnapshot != null) {
@@ -88,6 +93,29 @@ public class Users_list extends Base_fragment {
 
     @Override
     public boolean onBackPressed() {
+      //  super.onBackPressed();
+       Log.d("HH","RETOUUUUUUUUUUR");
+
+        Bundle args = new Bundle();
+
+       if(provenance.equals("mes_reservations")) {
+           Log.d("HH","RETOUUUUUUUUUUR MES RESER");
+           Mes_reservations r = new Mes_reservations();
+           r.setArguments(args);
+           FragmentTransaction transaction = getFragmentManager().beginTransaction();
+           transaction.replace(R.id.dynamic_fragment_frame_layout, r).commit();
+       }
+
+       else {
+           Log.d("HH","RETOUUUUUUUUUUR RESER");
+           Reservation r = new Reservation();
+           r.setArguments(args);
+           FragmentTransaction transaction = getFragmentManager().beginTransaction();
+           transaction.replace(R.id.dynamic_fragment_frame_layout, r).commit();
+       }
+
+
         return false;
     }
+
 }

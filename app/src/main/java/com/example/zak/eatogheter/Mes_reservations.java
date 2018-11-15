@@ -50,6 +50,7 @@ public class Mes_reservations extends Base_fragment {
 
                 Bundle args = new Bundle();
                 args.putSerializable("users", reservation_model.getUsers());
+                args.putString("provenance","mes_reservations");
                 users_list.setArguments(args);
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -83,24 +84,32 @@ public class Mes_reservations extends Base_fragment {
                         mAuth = FirebaseAuth.getInstance();
                         FirebaseUser userFirebase = mAuth.getCurrentUser();
                         String userId = userFirebase.getUid();
-                        
+
                         while (it.hasNext()) {
 
                             String key = (String) it.next();
                             Map<String, Object> postValues = (Map) value.get(key);
                             ArrayList<String>users;
+                            String key_key="0";
                             try{
                                 HashMap<String, String> users_map = (HashMap<String, String>) postValues.get("users");
                                 users = new ArrayList<>(users_map.values());
+                                /*************************/
+                                for (Object o : users_map.keySet()) {
+                                    if (users_map.get(o).equals(userId)) {
+                                       key_key=(String)o;
+                                       break;
+                                    }
+                                }
+                                /*************************/
                             }catch (Exception e){
                                users=(ArrayList<String>) postValues.get("users");
                             }
 
                             if (users.contains(userId)) {
-
                                  HashMap<String, String> hash_resto = (HashMap<String, String>) postValues.get("r");
                                  Reponse_requete resto = new Reponse_requete(hash_resto.get("id"), hash_resto.get("nom"), hash_resto.get("adresse"), hash_resto.get("categorie"));
-                                 Reservation_model r = new Reservation_model(resto, (String) postValues.get("date"), (String) postValues.get("heure"), users);
+                                 Reservation_model r = new Reservation_model(key,resto, (String) postValues.get("date"), (String) postValues.get("heure"), users,key_key);
 
                                  list_reservation.add(r);
                             }
@@ -127,10 +136,22 @@ public class Mes_reservations extends Base_fragment {
         });
 
 
+
+
     }
 
     @Override
     public boolean onBackPressed() {
+
+        Recherche recherche=new Recherche();
+
+        Bundle args = new Bundle();
+        recherche.setArguments(args);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.dynamic_fragment_frame_layout, recherche);
+        transaction.commit();
+
         return false;
     }
 

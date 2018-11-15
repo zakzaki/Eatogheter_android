@@ -10,6 +10,7 @@ public class Reservation_model implements Serializable {
     private String date;
     private String heure;
     private ArrayList<String>users;
+    private String key_key;
 
     public Reservation_model(String key, Reponse_requete r, String date, String heure, ArrayList<String> users) {
         this.key=key;
@@ -19,6 +20,15 @@ public class Reservation_model implements Serializable {
         this.users = users;
     }
 
+    public Reservation_model(String key, Reponse_requete r, String date, String heure, ArrayList<String> users,String key_key) {
+        this.key=key;
+        this.r = r;
+        this.date = date;
+        this.heure = heure;
+        this.users = users;
+        this.key_key=key_key;
+    }
+
     public Reservation_model(Reponse_requete r, String date, String heure, ArrayList<String> users) {
         this.r = r;
         this.date = date;
@@ -26,10 +36,11 @@ public class Reservation_model implements Serializable {
         this.users = users;
     }
 
-    public Reservation_model(Reponse_requete r, String date, String heure) {
+    public Reservation_model(Reponse_requete r, String date, String heure,String key_key) {
         this.r = r;
         this.date = date;
         this.heure = heure;
+        this.key_key=key_key;
     }
 
     public Reservation_model() {
@@ -74,5 +85,13 @@ public class Reservation_model implements Serializable {
 
     public void setUsers(ArrayList<String> users) {
         this.users = users;
+    }
+
+    public String getKey_key() {
+        return key_key;
+    }
+
+    public void setKey_key(String key_key) {
+        this.key_key = key_key;
     }
 }

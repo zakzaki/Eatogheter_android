@@ -36,7 +36,8 @@
         <activity android:name=".Mes_reservations" />
         <activity android:name=".Mes_reservations_adapter" />
         <activity android:name=".Users_adapter" />
-        <activity android:name=".Users_list"></activity>
+        <activity android:name=".Users_list" />
+        <activity android:name=".Profil"></activity>
     </application>
 
 </manifest>

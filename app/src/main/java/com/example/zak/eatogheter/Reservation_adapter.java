@@ -47,7 +47,6 @@ public class Reservation_adapter extends ArrayAdapter<Reservation_model> {
         m_date=convertView.findViewById(R.id.activity_reservation_adapter_date);
         m_heure=convertView.findViewById(R.id.activity_reservation_adapter_heure);
         m_rejoindre_btn=convertView.findViewById(R.id.reservation_adapter_btn);
-        m_voir_btn=convertView.findViewById(R.id.reservation_adapter__voir_btn);
 
         final Reservation_model res=getItem(position);
         String key=res.getKey();
@@ -65,8 +64,6 @@ public class Reservation_adapter extends ArrayAdapter<Reservation_model> {
                     String key=res.getKey();
                     FirebaseAuth mAuth;
 
-                    Log.d("HHH","KEY EST  "+key);
-
                     mAuth = FirebaseAuth.getInstance();
                     FirebaseUser userFirebase = mAuth.getCurrentUser();
 
@@ -77,7 +74,7 @@ public class Reservation_adapter extends ArrayAdapter<Reservation_model> {
 
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     String key_u = database.getReference("reservations").child("users").push().getKey();
-                    Log.d("HHH","AAAAAAAAAAAAAAAAAAAAAA "+key_u);
+
 
                     mDatabase.child("reservations").child(key).child("users").child(key_u).setValue(userId);
 
@@ -92,17 +89,6 @@ public class Reservation_adapter extends ArrayAdapter<Reservation_model> {
 
             }
         });
-
-        m_voir_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-        });
-
-
 
         return convertView;
     }

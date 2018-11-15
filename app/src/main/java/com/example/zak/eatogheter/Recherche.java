@@ -1,18 +1,10 @@
 package com.example.zak.eatogheter;
 
-import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,19 +31,11 @@ import Model.Reponse_requete;
 
 public class Recherche extends Base_fragment{
 
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-
-    //private ArrayList<Reponse_requete>reponse_f;
-
-
 
 
     private EditText m_edit_txt_localisation, m_edit_txt_mot_cle, m_edit_txt_rayon, m_edit_txt_resultat;
     private Button m_btn;
     private TextView txt = null ;
-    static String reponse1="" ;
     final static String idkey = "SPE5SUH4TUBNL3BH3E2URDSALLW0FSIR4EXYYEXUTFF32G22" ;
     final static String appkey = "EVZVG4MB3GXKIJLEYK051SBRTTNG0BYPSCWV5LE3KG5MVRL3" ;
     static final String REQ_TAG = "VACTIVITY";
@@ -65,7 +49,7 @@ public class Recherche extends Base_fragment{
 
         m_edit_txt_localisation= view.findViewById(R.id.activity_recherche_edit_localisation);
         m_edit_txt_mot_cle= view.findViewById(R.id.activity_recherche_edit_mot_cle);
-        m_edit_txt_rayon = view.findViewById(R.id.activity_recherche_edit_rayon);
+      //  m_edit_txt_rayon = view.findViewById(R.id.activity_recherche_edit_rayon);
         m_edit_txt_resultat= view.findViewById(R.id.activity_recherche_edit_nb_resultat);
         m_btn= view.findViewById(R.id.activity_recherche_btn_rechercher);
 
@@ -87,7 +71,7 @@ public class Recherche extends Base_fragment{
 
         m_edit_txt_localisation.addTextChangedListener(textWatcher);
         m_edit_txt_mot_cle.addTextChangedListener(textWatcher);
-        m_edit_txt_rayon.addTextChangedListener(textWatcher);
+     //   m_edit_txt_rayon.addTextChangedListener(textWatcher);
         m_edit_txt_resultat.addTextChangedListener(textWatcher);
 
         m_btn.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +87,7 @@ return view;
     private void refreshButton(){
         m_btn.setEnabled( !m_edit_txt_localisation.getText().toString().isEmpty()
                 && !m_edit_txt_mot_cle.getText().toString().isEmpty()
-                && !m_edit_txt_rayon.getText().toString().isEmpty()
+              //  && !m_edit_txt_rayon.getText().toString().isEmpty()
                 && !m_edit_txt_resultat.getText().toString().isEmpty() );
     }
 
@@ -112,7 +96,8 @@ return view;
         final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         final String near = m_edit_txt_localisation.getText().toString() ;
         final String query= m_edit_txt_mot_cle.getText().toString();
-        final String radius=m_edit_txt_rayon.getText().toString();
+        //final String radius=m_edit_txt_rayon.getText().toString();
+        final String radius="60000";
         final String result=m_edit_txt_resultat.getText().toString();
         final String final_url = url+"&near="+near+"&radius="+radius+"&query="+query+"&limit="+result;
 
@@ -165,7 +150,7 @@ return view;
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getActivity(), "ERREUR DANS L API",
+                Toast.makeText(getActivity(), "ERREUR EN PROVENANCE DE L'API",
                         Toast.LENGTH_SHORT).show();
 
             }

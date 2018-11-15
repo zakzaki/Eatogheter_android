@@ -19,11 +19,13 @@
                     android:title="Profil" />
                 <item
                     android:id="@+id/activity_main_drawer_reservations"
-                    android:icon="@drawable/baseline_account_circle_black_18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:icon="@drawable/icons8_reservation_50"
                     android:title="Chercher une reservation" />
                 <item
                     android:id="@+id/activity_main_drawer_mes_reservations"
-                    android:icon="@drawable/baseline_account_circle_black_18dp"
+                    android:icon="@drawable/icons8_boite_vide_24"
                     android:title="Mes Reservations" />
             </group>
         </menu>

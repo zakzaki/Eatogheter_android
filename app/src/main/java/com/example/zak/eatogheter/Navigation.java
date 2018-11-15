@@ -1,6 +1,7 @@
 package com.example.zak.eatogheter;
 
 
+import android.annotation.SuppressLint;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,7 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+
+import java.util.List;
 
 public class Navigation extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
 
@@ -52,6 +56,9 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
                 break;
 
             case R.id.activity_main_drawer_profile:
+                Profil profil =new Profil();
+                fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, profil).commit();
+
                 break;
 
             case R.id.activity_main_drawer_reservations:
@@ -99,5 +106,31 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
     private void configureNavigationView(){
         this.navigationView = findViewById(R.id.activity_navigation_nav_view);
         navigationView.setNavigationItemSelectedListener(Navigation.this);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed()
+    {
+
+        Log.d("HH","RETOUUUUUUUUUUR 1");
+        drawerLayout.closeDrawers();
+        List fragmentList = getSupportFragmentManager().getFragments();
+
+        boolean handled = false;
+        for(Object f : fragmentList) {
+            if(f instanceof Base_fragment) {
+                Log.d("HH","RETOUUUUUUUUUUR OUI");
+                handled = ((Base_fragment)f).onBackPressed();
+
+                if(handled) {
+                    break;
+                }
+            }
+        }
+      /*  if(!handled) {
+            Log.d("HH","RETOUUUUUUUUUUR NON");
+            super.onBackPressed();
+        }*/
     }
 }

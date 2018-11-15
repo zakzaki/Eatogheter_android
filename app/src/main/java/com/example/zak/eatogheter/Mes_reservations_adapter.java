@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
-
 import Model.Reservation_model;
 
 public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
@@ -35,16 +37,14 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
         }
 
         final TextView m_nom, m_adresse, m_date, m_heure;
-        final Button m_modifier, m_supprimer, m_voir;
+        final Button m_supprimer;
 
         m_nom=convertView.findViewById(R.id.activity_mes_reservation_adapter_nom);
         m_adresse=convertView.findViewById(R.id.activity_mes_reservation_adapter_adress);
         m_date=convertView.findViewById(R.id.activity_mes_reservation_adapter_date);
         m_heure=convertView.findViewById(R.id.activity_mes_reservation_adapter_heure);
 
-        m_modifier=convertView.findViewById(R.id.mes_reservation_adapter_btn_modifier);
         m_supprimer=convertView.findViewById(R.id.mes_reservation_adapter_btn_supprimer);
-      //  m_voir=convertView.findViewById(R.id.mes_reservation_adapter_voir_btn);
 
         final Reservation_model res=getItem(position);
 
@@ -54,6 +54,33 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
         m_heure.setText(res.getHeure());
 
 
+        m_supprimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference mDatabase = database.getReference("reservations");
+
+                try{
+                    if(res.getUsers().size()==1){
+                        mDatabase.child(res.getKey()).removeValue();
+
+                    }else{
+                        mDatabase.child(res.getKey()).child("users").child(res.getKey_key()).removeValue();
+                    }
+
+                    Toast.makeText(getContext(), "Annulation réussite",
+                            Toast.LENGTH_LONG).show();
+
+                  notifyDataSetChanged();
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "ERREUR LORS DE LA SUPPRESSION",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         return convertView;
     }

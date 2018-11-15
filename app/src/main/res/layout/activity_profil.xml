@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_0000_layout"
+    tools:context=".Profil">
+
+
+    <EditText
+        android:id="@+id/activity_profil_nom"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:hint="Nom" />
+
+    <EditText
+        android:id="@+id/activity_profil_prenom"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_profil_nom"
+        android:hint="Prenom" />
+
+    <EditText
+        android:id="@+id/activity_profil_age"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_profil_prenom"
+        android:hint="Age" />
+
+    <EditText
+        android:id="@+id/activity_profil_pseudo"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_profil_age"
+        android:hint="Pseudo" />
+
+  <!--  <EditText
+        android:id="@+id/activity_profil_password_txt"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_profil_pseudo"
+        android:hint="Password"
+        android:inputType="textPassword" />-->
+
+    <Button
+        android:id="@+id/activity_profil_cnx_btn"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_margin="30dp"
+        android:layout_below="@+id/activity_profil_pseudo"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/img_0001s_0001_btn"
+        android:text="Enregistrer"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>

@@ -2,9 +2,11 @@ package com.example.zak.eatogheter;
 
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,6 +43,23 @@ public class Reservation extends Base_fragment {
         m_lv=view.findViewById(R.id.activity_reservation_list_view);
 
         read_reservation();
+
+        m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Reservation_model reservation_model=(Reservation_model)parent.getItemAtPosition(position);
+
+                Users_list users_list=new Users_list();
+
+                Bundle args = new Bundle();
+                args.putSerializable("users", reservation_model.getUsers());
+                users_list.setArguments(args);
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.dynamic_fragment_frame_layout, users_list);
+                transaction.commit();
+            }
+        });
 
 return  view;
     }

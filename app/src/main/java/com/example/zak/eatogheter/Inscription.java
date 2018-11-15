@@ -81,82 +81,84 @@ public class Inscription extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mAuth.createUserWithEmailAndPassword(m_mail.getText().toString(), m_pass.getText().toString())
-                        .addOnCompleteListener(Inscription.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // La c'est bon la connexion est établie
-                                    Log.d(TAG, "signInWithEmail:success");
+                try {
+                    int num = Integer.parseInt(m_age.getText().toString().trim());
 
-                                   // FirebaseUser user = mAuth.getCurrentUser();
+                        mAuth.createUserWithEmailAndPassword(m_mail.getText().toString().trim(), m_pass.getText().toString())
+                                .addOnCompleteListener(Inscription.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "signInWithEmail:success");
 
-                                  //  String id=user.getUid();
+                                            User u= new User(m_nom.getText().toString().trim(),m_prenom.getText().toString().trim(),m_age.getText().toString().trim(),m_pseudo.getText().toString().trim());
 
-                                    User u= new User(m_nom.getText().toString(),m_prenom.getText().toString(),m_age.getText().toString(),m_pseudo.getText().toString());
+                                            try{
+                                                inserer_info(u);
 
-                                    try{
-                                        inserer_info(u);
+                                                Toast.makeText(Inscription.this, "INSCRIPTION REUSSITE",
+                                                        Toast.LENGTH_SHORT).show();
 
-                                        Intent intent = new Intent(Inscription.this, MainActivity.class);
-                                        startActivity(intent);
+                                                Intent intent = new Intent(Inscription.this, MainActivity.class);
+                                                startActivity(intent);
 
-                                    }catch (Exception e){
-                                        Toast.makeText(Inscription.this, "ERREUR D INSERTION DONNEES",
-                                                Toast.LENGTH_SHORT).show();
-                                        e.printStackTrace();
+                                            }catch (Exception e){
+                                                Toast.makeText(Inscription.this, "ERREUR LORS DE L'INSCRIPTION",
+                                                        Toast.LENGTH_LONG).show();
+                                                e.printStackTrace();
+                                            }
+
+
+
+                                        } else {
+                                            try
+                                            {
+                                                throw task.getException();
+                                            }
+                                            catch (FirebaseAuthWeakPasswordException weakPassword)
+                                            {
+                                                Log.d(TAG, "onComplete: weak_password");
+                                                Toast.makeText(Inscription.this, "Mot passe est de moins de 6 caracteres",
+                                                        Toast.LENGTH_SHORT).show();
+
+                                            }
+                                            catch (FirebaseAuthInvalidCredentialsException malformedEmail)
+                                            {
+                                                Log.d(TAG, "onComplete: malformed_email");
+                                                Toast.makeText(Inscription.this, "Adresse mail non valide",
+                                                        Toast.LENGTH_SHORT).show();
+
+                                            }
+                                            catch (FirebaseAuthUserCollisionException existEmail)
+                                            {
+                                                Log.d(TAG, "onComplete: exist_email");
+                                                Toast.makeText(Inscription.this, "Adresse mail est deja utilisée",
+                                                        Toast.LENGTH_SHORT).show();
+
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Log.d(TAG, "onComplete: " + e.getMessage());
+                                            }
+
+                                        }
+
                                     }
-
-
-
-                                } else {
-                                    try
-                                    {
-                                        throw task.getException();
-                                    }
-                                    // if user enters wrong email.
-                                    catch (FirebaseAuthWeakPasswordException weakPassword)
-                                    {
-                                        Log.d(TAG, "onComplete: weak_password");
-                                        Toast.makeText(Inscription.this, "Mot passe est de moins de 6 caracteres",
-                                                Toast.LENGTH_SHORT).show();
-
-                                    }
-                                    // if user enters wrong password.
-                                    catch (FirebaseAuthInvalidCredentialsException malformedEmail)
-                                    {
-                                        Log.d(TAG, "onComplete: malformed_email");
-                                        Toast.makeText(Inscription.this, "Adresse mail non valide",
-                                                Toast.LENGTH_SHORT).show();
-
-                                    }
-                                    catch (FirebaseAuthUserCollisionException existEmail)
-                                    {
-                                        Log.d(TAG, "onComplete: exist_email");
-                                        Toast.makeText(Inscription.this, "Adresse mail est deja utilisée",
-                                                Toast.LENGTH_SHORT).show();
-
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        Log.d(TAG, "onComplete: " + e.getMessage());
-                                    }
-
-                                }
-
-                            }
-                        });
-
+                                });
+                } catch (NumberFormatException e) {
+                    Toast.makeText(Inscription.this, "Entrez un age valide",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     private void refrechButton(){
-        m_btn.setEnabled( !m_mail.getText().toString().isEmpty()
-                        && !m_nom.getText().toString().isEmpty()
-                        && !m_prenom.getText().toString().isEmpty()
-                        && !m_age.getText().toString().isEmpty()
-                        && !m_pseudo.getText().toString().isEmpty()
+        m_btn.setEnabled( !m_mail.getText().toString().trim().isEmpty()
+                        && !m_nom.getText().toString().trim().isEmpty()
+                        && !m_prenom.getText().toString().trim().isEmpty()
+                        && !m_age.getText().toString().trim().isEmpty()
+                        && !m_pseudo.getText().toString().trim().isEmpty()
                         && !m_pass.getText().toString().isEmpty()
         );
     }
