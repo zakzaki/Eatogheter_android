@@ -3,6 +3,7 @@ package com.example.zak.eatogheter;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -39,8 +41,21 @@ public class Reservation extends Base_fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
 
+        super.onCreateView(inflater, view_group, savedInstanceState);
+
         View view=inflater.inflate(R.layout.activity_reservation,view_group,false);
         m_lv=view.findViewById(R.id.activity_reservation_list_view);
+
+        if (savedInstanceState != null ) {
+
+            Reservation reservation = new Reservation();
+            Bundle args = new Bundle();
+            reservation.setArguments(args);
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.dynamic_fragment_frame_layout, reservation).commit();
+
+        }
 
         read_reservation();
 
@@ -101,11 +116,73 @@ return  view;
 
                             if (!users.contains(userId)) {
 
-                                HashMap<String, String> hash_resto = (HashMap<String, String>) postValues.get("r");
-                                Reponse_requete resto = new Reponse_requete(hash_resto.get("id"), hash_resto.get("nom"), hash_resto.get("adresse"), hash_resto.get("categorie"));
-                                Reservation_model r = new Reservation_model(key, resto, (String) postValues.get("date"), (String) postValues.get("heure"), users);
+                                /**********************************************/
 
-                                list_reservation.add(r);
+                                String date=(String) postValues.get("date");
+                                int day,month,year,hour,minute;
+
+                                try{
+                                    day=Integer.parseInt(date.substring(0,2));
+                                    try{
+                                        month=Integer.parseInt(date.substring(3,5));
+                                        year=Integer.parseInt(date.substring(6,10));
+                                    }catch (NumberFormatException e){
+
+                                        month=Integer.parseInt(date.substring(3,4));
+                                        year=Integer.parseInt(date.substring(5,9));
+                                    }
+
+                                }catch (NumberFormatException e){
+                                    day=Integer.parseInt(date.substring(0,1));
+
+                                    try{
+                                        month=Integer.parseInt(date.substring(2,4));
+                                        year=Integer.parseInt(date.substring(5,9));
+                                    }catch (NumberFormatException e2){
+                                        month=Integer.parseInt(date.substring(2,3));
+                                        year=Integer.parseInt(date.substring(4,8));
+                                    }
+                                }
+
+                                month--;
+                                String heure=(String) postValues.get("heure");
+
+
+                                try{
+                                    hour=Integer.parseInt(heure.substring(0,2));
+
+                                    try{
+                                        minute=Integer.parseInt(heure.substring(3,5));
+                                    }catch (NumberFormatException e){
+                                        minute=Integer.parseInt(heure.substring(3,4));
+                                    }
+
+                                }catch (NumberFormatException e){
+                                    hour=Integer.parseInt(heure.substring(0,1));
+
+                                    try{
+                                        minute=Integer.parseInt(heure.substring(2,heure.length()));
+                                    }catch (NumberFormatException e2){
+                                        minute=Integer.parseInt(heure.substring(2,heure.length()));
+                                    }
+                                }
+
+
+                                Calendar validDate = Calendar.getInstance();
+                                validDate.set(year, month, day,hour,minute);
+
+                                Calendar currentDate = Calendar.getInstance();
+
+                                if (currentDate.before(validDate)) {
+
+                                    HashMap<String, String> hash_resto = (HashMap<String, String>) postValues.get("r");
+                                    Reponse_requete resto = new Reponse_requete(hash_resto.get("id"), hash_resto.get("nom"), hash_resto.get("adresse"), hash_resto.get("categorie"));
+                                    Reservation_model r = new Reservation_model(key, resto, (String) postValues.get("date"), (String) postValues.get("heure"), users);
+
+                                    list_reservation.add(r);
+                                }
+
+                                /**********************************************/
                             }
                         }
                     }
@@ -131,6 +208,22 @@ return  view;
 
     @Override
     public boolean onBackPressed() {
+        Recherche recherche=new Recherche();
+
+        Bundle args = new Bundle();
+        recherche.setArguments(args);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.dynamic_fragment_frame_layout, recherche);
+        transaction.commit();
+
         return false;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        //  outState.putSerializable("saved",list_reservation);
+        super.onSaveInstanceState(outState);
+    }
+
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_reserver_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Reserver">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -15,39 +19,63 @@
         android:text="Réserver un créneau"
         android:textSize="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
+        android:layout_margin="35dp"
         android:textStyle="bold"
         />
+
+    <ImageButton
+        android:id="@+id/reserver_calandrier"
+        android:layout_width="49dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/reserver_txt"
+        android:layout_margin="20dp"
+        android:background="@drawable/ic_perm_contact_calendar_black_24dp" />
+
+
+    <ImageButton
+        android:id="@+id/reserver_heure"
+        android:layout_width="49dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/reserver_calandrier"
+        android:layout_margin="20dp"
+        android:background="@drawable/ic_access_time_black_24dp" />
+
 
     <TextView
         android:id="@+id/reserver_date_txt_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Selectionner la date"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:textSize="30dp"
         android:layout_below="@+id/reserver_txt"
-        />
+        android:layout_toRightOf="@+id/reserver_calandrier"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Selectionner la date"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/reserver_heure_txt_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Selectionner l'heure"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:textSize="30dp"
         android:layout_below="@+id/reserver_date_txt_view"
-        />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/reserver_heure"
+        android:hint="Selectionner l'heure"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/reserver_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Créer un RDV"
         android:layout_below="@+id/reserver_heure_txt_view"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="60dp"
+        android:text="Créer un RDV" />
 
 </RelativeLayout>
+
+</ScrollView>

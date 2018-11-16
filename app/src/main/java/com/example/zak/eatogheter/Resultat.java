@@ -45,12 +45,8 @@ public class Resultat extends Base_fragment{
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("LOG","JE SUIIISSSS LAAAAAA ");
+
                 Reponse_requete reponse_requete=(Reponse_requete)parent.getItemAtPosition(position);
-
-
-               // SharedPreferences editor = getSharedPreferences("param", 0);
-               // editor.putBoolean("jj", true);
 
                 Reserver reserver=new Reserver();
 

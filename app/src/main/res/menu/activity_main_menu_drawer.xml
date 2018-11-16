@@ -7,7 +7,8 @@
         <item
             android:id="@+id/activity_main_drawer_news"
             android:icon="@drawable/baseline_search_black_18dp"
-            android:title="Effectuer une recherche" />
+            android:title="Effectuer une recherche"
+            />
     </group>
 
     <item android:title="Configuration">
@@ -30,5 +31,16 @@
             </group>
         </menu>
     </item>
+
+    <item android:title="">
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/activity_main_drawer_deconnexion"
+                android:icon="@drawable/log_out"
+                android:title="Déconnexion" />
+        </group>
+
+    </item>
+
 
 </menu>

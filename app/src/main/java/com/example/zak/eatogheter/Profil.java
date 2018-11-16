@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.internal.firebase_auth.zzap;
@@ -45,13 +46,20 @@ public class Profil extends Base_fragment {
     private FirebaseAuth mAuth;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
 
+        super.onCreateView(inflater, view_group, savedInstanceState);
         View view=inflater.inflate(R.layout.activity_profil,view_group,false);
 
 
         final EditText m_nom, m_prenom, m_age, m_pseudo;
         final Button m_btn;
+
 
         m_nom=view.findViewById(R.id.activity_profil_nom);
         m_prenom=view.findViewById(R.id.activity_profil_prenom);
@@ -59,6 +67,17 @@ public class Profil extends Base_fragment {
         m_pseudo=view.findViewById(R.id.activity_profil_pseudo);
 
         m_btn=view.findViewById(R.id.activity_profil_cnx_btn);
+
+        if (savedInstanceState != null) {
+
+            Profil profil = new Profil();
+            Bundle args = new Bundle();
+            profil.setArguments(args);
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.dynamic_fragment_frame_layout, profil).commit();
+
+        }
 
         /**********************************/
 
@@ -94,9 +113,10 @@ public class Profil extends Base_fragment {
                         Log.d("hh","VALUUUEE "+value.toString());
 
                         if(value!=null){
+
                             m_nom.setText((String) value.get("nom"));
                             m_prenom.setText((String) value.get("prenom"));
-                            m_age.setText((String) value.get("age"));
+                            m_age.setText((String) value.get("prenom"));
                             m_pseudo.setText((String) value.get("pseudo"));
                             }
                     }
@@ -178,6 +198,12 @@ public class Profil extends Base_fragment {
         transaction.commit();
 
         return false;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        //outState.putParcelableArrayList("key", my_books_list);
+        super.onSaveInstanceState(outState);
     }
 
 }

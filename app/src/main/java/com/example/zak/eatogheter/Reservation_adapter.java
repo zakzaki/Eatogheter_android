@@ -1,8 +1,10 @@
 package com.example.zak.eatogheter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +80,8 @@ public class Reservation_adapter extends ArrayAdapter<Reservation_model> {
 
                     mDatabase.child("reservations").child(key).child("users").child(key_u).setValue(userId);
 
-                    Log.d("HHH","OUUUUUUPS");
+                    Toast.makeText(getContext(), "Réservation réussie",
+                            Toast.LENGTH_LONG).show();
 
                 }catch (Exception e){
                     Toast.makeText(getContext(), "ERREUR LORS DE LA RESERVATION! REESSAYER",

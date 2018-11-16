@@ -1,5 +1,6 @@
 package com.example.zak.eatogheter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.Editable;
@@ -41,6 +42,13 @@ public class Recherche extends Base_fragment{
     static final String REQ_TAG = "VACTIVITY";
     final static String version = "20181002";
     final static String url  ="https://api.foursquare.com/v2/venues/search?client_id="+idkey+"&client_secret="+appkey+"&v="+version+"";
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
@@ -99,6 +107,16 @@ return view;
         //final String radius=m_edit_txt_rayon.getText().toString();
         final String radius="60000";
         final String result=m_edit_txt_resultat.getText().toString();
+
+        try {
+            int num = Integer.parseInt(m_edit_txt_resultat.getText().toString().trim());
+        }catch (NumberFormatException e){
+            Toast.makeText(getContext(), "Entrez un nombre valide",
+                    Toast.LENGTH_SHORT).show();
+            m_edit_txt_resultat.setText("");
+            return;
+        }
+
         final String final_url = url+"&near="+near+"&radius="+radius+"&query="+query+"&limit="+result;
 
 

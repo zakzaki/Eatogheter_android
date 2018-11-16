@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,7 +22,6 @@ import Model.Reservation_model;
 
 public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
 
-
    public Mes_reservations_adapter(@NonNull Context context, int ressource, @NonNull List<Reservation_model> object) {
         super(context, ressource, object);
 
@@ -28,8 +29,7 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
+    public View getView(int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -69,10 +69,9 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
                         mDatabase.child(res.getKey()).child("users").child(res.getKey_key()).removeValue();
                     }
 
-                    Toast.makeText(getContext(), "Annulation réussite",
+                    Toast.makeText(getContext(), "Annulation réussite, veuillez recharger la page",
                             Toast.LENGTH_LONG).show();
 
-                  notifyDataSetChanged();
 
                 }catch (Exception e){
                     e.printStackTrace();
@@ -84,5 +83,4 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
 
         return convertView;
     }
-
 }

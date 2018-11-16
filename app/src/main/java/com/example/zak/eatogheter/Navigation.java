@@ -2,6 +2,7 @@ package com.example.zak.eatogheter;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -73,6 +76,16 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
                 fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();
 
                 break;
+
+            case R.id.activity_main_drawer_deconnexion:
+                drawerLayout.closeDrawers();
+                FirebaseAuth.getInstance().signOut();
+
+                Intent intent = new Intent(Navigation.this, MainActivity.class);
+                startActivity(intent);
+
+                break;
+
 
             default:
                 break;

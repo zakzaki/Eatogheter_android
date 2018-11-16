@@ -33,12 +33,41 @@ public class Mes_reservations extends Base_fragment {
     private FirebaseAuth mAuth;
     private ListView m_lv;
     private Mes_reservations_adapter adapter;
+    private ArrayList<Reservation_model> list_reservation = new ArrayList<>();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
 
+        super.onCreateView(inflater, view_group, savedInstanceState);
+
         View view=inflater.inflate(R.layout.activity_mes_reservations,view_group,false);
         m_lv=view.findViewById(R.id.activity_mes_reservations_list_view);
+
+        if (savedInstanceState != null  ) {
+
+            Mes_reservations mes_reservations = new Mes_reservations();
+            Bundle args = new Bundle();
+            mes_reservations.setArguments(args);
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();
+
+          /*  list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
+
+            adapter= new Mes_reservations_adapter(getActivity(), R.layout.activity_mes_reservations_adapter,list_reservation);
+            m_lv.setAdapter(adapter);
+            if(list_reservation.size()==0)
+                Toast.makeText(getContext(), "Vous n'avez pas de réservations ",
+                        Toast.LENGTH_LONG).show();
+*/
+        }
+
+        else
         read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,7 +101,7 @@ public class Mes_reservations extends Base_fragment {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<Reservation_model> list_reservation = new ArrayList<>();
+
                 try{
                 if (dataSnapshot != null) {
                     HashMap value = (HashMap) dataSnapshot.getValue();
@@ -153,6 +182,12 @@ public class Mes_reservations extends Base_fragment {
         transaction.commit();
 
         return false;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+      //  outState.putSerializable("saved",list_reservation);
+        super.onSaveInstanceState(outState);
     }
 
 }

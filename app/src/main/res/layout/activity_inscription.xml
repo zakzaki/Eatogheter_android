@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +8,11 @@
     tools:context=".Inscription"
     android:background="@drawable/img_0000_layout"
     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
     <EditText
         android:id="@+id/activity_inscription_mail"
@@ -75,6 +81,6 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
          />
+    </RelativeLayout>
 
-
-</RelativeLayout>
+</ScrollView>
