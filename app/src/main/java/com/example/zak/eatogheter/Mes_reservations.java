@@ -38,6 +38,20 @@ public class Mes_reservations extends Base_fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null  ) {
+
+       
+            list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
+            m_lv=getView().findViewById(R.id.activity_mes_reservations_list_view);
+            Log.d("h","LAAAAAAAAAAAAAAAAAAAAAAAA");
+            adapter= new Mes_reservations_adapter(getActivity(), R.layout.activity_mes_reservations_adapter,list_reservation);
+            m_lv.setAdapter(adapter);
+            if(list_reservation.size()==0)
+                Toast.makeText(getContext(), "Vous n'avez pas de réservations ",
+                        Toast.LENGTH_LONG).show();
+
+        }
     }
 
     @Override
@@ -48,14 +62,14 @@ public class Mes_reservations extends Base_fragment {
         View view=inflater.inflate(R.layout.activity_mes_reservations,view_group,false);
         m_lv=view.findViewById(R.id.activity_mes_reservations_list_view);
 
-        if (savedInstanceState != null  ) {
+    /*    if (savedInstanceState != null  ) {
 
-          /*  Mes_reservations mes_reservations = new Mes_reservations();
+            Mes_reservations mes_reservations = new Mes_reservations();
             Bundle args = new Bundle();
             mes_reservations.setArguments(args);
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();*/
+            transaction.replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();
 
             list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
 
@@ -68,7 +82,8 @@ public class Mes_reservations extends Base_fragment {
 
         }
 
-       else read_reservation();
+       else */
+           read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
