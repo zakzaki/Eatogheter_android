@@ -56,8 +56,7 @@ public class Reservation extends Base_fragment {
             transaction.replace(R.id.dynamic_fragment_frame_layout, reservation).commit();
 
         }
-
-        read_reservation();
+        else  read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

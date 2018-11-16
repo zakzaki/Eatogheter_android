@@ -67,8 +67,7 @@ public class Mes_reservations extends Base_fragment {
 */
         }
 
-        else
-        read_reservation();
+        else  read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
