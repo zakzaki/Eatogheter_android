@@ -33,7 +33,7 @@ public class Mes_reservations extends Base_fragment {
     private FirebaseAuth mAuth;
     private ListView m_lv;
     private Mes_reservations_adapter adapter;
-    private ArrayList<Reservation_model> list_reservation = new ArrayList<>();
+    ArrayList<Reservation_model> list_reservation = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,24 +50,25 @@ public class Mes_reservations extends Base_fragment {
 
         if (savedInstanceState != null  ) {
 
-            Mes_reservations mes_reservations = new Mes_reservations();
+          /*  Mes_reservations mes_reservations = new Mes_reservations();
             Bundle args = new Bundle();
             mes_reservations.setArguments(args);
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();
+            transaction.replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();*/
 
-          /*  list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
+            list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
 
+            Log.d("h","LAAAAAAAAAAAAAAAAAAAAAAAA");
             adapter= new Mes_reservations_adapter(getActivity(), R.layout.activity_mes_reservations_adapter,list_reservation);
             m_lv.setAdapter(adapter);
             if(list_reservation.size()==0)
                 Toast.makeText(getContext(), "Vous n'avez pas de réservations ",
                         Toast.LENGTH_LONG).show();
-*/
+
         }
 
-        else  read_reservation();
+       else read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -102,9 +103,9 @@ public class Mes_reservations extends Base_fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 try{
-                if (dataSnapshot != null) {
-                    HashMap value = (HashMap) dataSnapshot.getValue();
-                    if (value != null) {
+                    if (dataSnapshot != null) {
+                        HashMap value = (HashMap) dataSnapshot.getValue();
+                        if (value != null) {
 
                         Set cles = value.keySet();
                         Iterator it = cles.iterator();
@@ -133,7 +134,6 @@ public class Mes_reservations extends Base_fragment {
                             }catch (Exception e){
                                users=(ArrayList<String>) postValues.get("users");
                             }
-
                             if (users.contains(userId)) {
                                  HashMap<String, String> hash_resto = (HashMap<String, String>) postValues.get("r");
                                  Reponse_requete resto = new Reponse_requete(hash_resto.get("id"), hash_resto.get("nom"), hash_resto.get("adresse"), hash_resto.get("categorie"));
@@ -185,7 +185,7 @@ public class Mes_reservations extends Base_fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-      //  outState.putSerializable("saved",list_reservation);
+       outState.putSerializable("saved",list_reservation);
         super.onSaveInstanceState(outState);
     }
 

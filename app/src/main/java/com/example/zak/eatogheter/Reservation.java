@@ -56,7 +56,7 @@ public class Reservation extends Base_fragment {
             transaction.replace(R.id.dynamic_fragment_frame_layout, reservation).commit();
 
         }
-        else  read_reservation();
+       else read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,7 +90,7 @@ return  view;
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Reservation_model> list_reservation = new ArrayList<>();
                 try {
-                if (dataSnapshot != null) {
+                  if (dataSnapshot != null) {
                     HashMap value = (HashMap) dataSnapshot.getValue();
                     if (value != null) {
                         Set cles = value.keySet();
@@ -224,5 +224,6 @@ return  view;
         //  outState.putSerializable("saved",list_reservation);
         super.onSaveInstanceState(outState);
     }
+
 
 }
