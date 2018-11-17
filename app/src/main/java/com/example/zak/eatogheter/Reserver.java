@@ -114,107 +114,108 @@ public class Reserver extends Base_fragment{
             @Override
             public void onClick(View v) {
 
-                String date=m_tv_date.getText().toString();
-                int day,month,year,hour,minute;
+                    if(!m_tv_date.getText().toString().equals("") && !m_tv_heure.getText().toString().equals("")){
 
-                try{
-                    day=Integer.parseInt(date.substring(0,2));
 
-                    try{
-                        month=Integer.parseInt(date.substring(3,5));
-                        year=Integer.parseInt(date.substring(6,10));
-                    }catch (NumberFormatException e){
-                        month=Integer.parseInt(date.substring(3,4));
-                        year=Integer.parseInt(date.substring(5,9));
-                    }
-                }catch (NumberFormatException e){
-                    day=Integer.parseInt(date.substring(0,1));
-                    try{
-                        month=Integer.parseInt(date.substring(2,4));
-                        year=Integer.parseInt(date.substring(5,9));
-                    }catch (NumberFormatException e2){
-                        month=Integer.parseInt(date.substring(2,3));
-                        year=Integer.parseInt(date.substring(4,8));
-                    }
-                }
-                month--;
-                String heure=m_tv_heure.getText().toString();
+                        String date=m_tv_date.getText().toString();
+                        int day,month,year,hour,minute;
 
-                try{
-                    hour=Integer.parseInt(heure.substring(0,2));
-
-                    try{
-                        minute=Integer.parseInt(heure.substring(3,5));
-                    }catch (NumberFormatException e){
-                        minute=Integer.parseInt(heure.substring(3,4));
-                    }
-
-                }catch (NumberFormatException e){
-                    hour=Integer.parseInt(heure.substring(0,1));
-
-                    try{
-                        minute=Integer.parseInt(heure.substring(2,heure.length()));
-                    }catch (NumberFormatException e2){
-                        minute=Integer.parseInt(heure.substring(2,heure.length()));
-                    }
-                }
-                Calendar validDate = Calendar.getInstance();
-                validDate.set(year, month, day,hour,minute);
-                Calendar currentDate = Calendar.getInstance();
-                if (currentDate.after(validDate)) {
-
-                    Toast.makeText(getActivity(), "Veuillez sélectionner une date et un horaire supérieur à celle d'auhourd'hui ",
-                            Toast.LENGTH_LONG).show();
-
-                }else{
-                    if(m_tv_date.getText().toString()!="Selectionner la date" && m_tv_heure.getText().toString() != "Selectionner l'heure"){
-
-                        Reponse_requete rep = (Reponse_requete) getArguments().getSerializable("resto2");
                         try{
+                            day=Integer.parseInt(date.substring(0,2));
 
-                            FirebaseAuth mAuth;
-
-                            mAuth = FirebaseAuth.getInstance();
-                            FirebaseUser userFirebase = mAuth.getCurrentUser();
-
-                            String userId = userFirebase.getUid();
-                            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
-                            ArrayList<String> users = new ArrayList<>();
-                            users.add(userId);
-
-                            Reservation_model restaurant = new Reservation_model(rep, m_tv_date.getText().toString(), m_tv_heure.getText().toString(), users);
-
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            String key = database.getReference("reservations").push().getKey();
-
-                            mDatabase.child("reservations").child(key).setValue(restaurant);
-
-
-                            Toast.makeText(getActivity(), "RESERVATION REUSSIE",
-                                    Toast.LENGTH_LONG).show();
-                            Recherche recherche = new Recherche();
-
-                            Bundle args = new Bundle();
-                            recherche.setArguments(args);
-
-                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.dynamic_fragment_frame_layout, recherche);
-                            transaction.commit();
-
-
-                        }catch(Exception e){
-                            Toast.makeText(getActivity(), "ERREUR LORS DE LA RESERVATION! REESSAYER",
-                                    Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
-                            refreshitem();
+                            try{
+                                month=Integer.parseInt(date.substring(3,5));
+                                year=Integer.parseInt(date.substring(6,10));
+                            }catch (NumberFormatException e){
+                                month=Integer.parseInt(date.substring(3,4));
+                                year=Integer.parseInt(date.substring(5,9));
+                            }
+                        }catch (NumberFormatException e){
+                            day=Integer.parseInt(date.substring(0,1));
+                            try{
+                                month=Integer.parseInt(date.substring(2,4));
+                                year=Integer.parseInt(date.substring(5,9));
+                            }catch (NumberFormatException e2){
+                                month=Integer.parseInt(date.substring(2,3));
+                                year=Integer.parseInt(date.substring(4,8));
+                            }
                         }
+                        month--;
+                        String heure=m_tv_heure.getText().toString();
 
+                        try{
+                            hour=Integer.parseInt(heure.substring(0,2));
+
+                            try{
+                                minute=Integer.parseInt(heure.substring(3,5));
+                            }catch (NumberFormatException e){
+                                minute=Integer.parseInt(heure.substring(3,4));
+                            }
+
+                        }catch (NumberFormatException e){
+                            hour=Integer.parseInt(heure.substring(0,1));
+
+                            try{
+                                minute=Integer.parseInt(heure.substring(2,heure.length()));
+                            }catch (NumberFormatException e2){
+                                minute=Integer.parseInt(heure.substring(2,heure.length()));
+                            }
+                        }
+                        Calendar validDate = Calendar.getInstance();
+                        validDate.set(year, month, day,hour,minute);
+                        Calendar currentDate = Calendar.getInstance();
+                        if (currentDate.after(validDate)) {
+
+                            Toast.makeText(getActivity(), "Veuillez sélectionner une date et un horaire supérieur à celle d'auhourd'hui ",
+                                    Toast.LENGTH_LONG).show();
+
+                        }else {
+
+                            Reponse_requete rep = (Reponse_requete) getArguments().getSerializable("resto2");
+                            try{
+
+                                FirebaseAuth mAuth;
+
+                                mAuth = FirebaseAuth.getInstance();
+                                FirebaseUser userFirebase = mAuth.getCurrentUser();
+
+                                String userId = userFirebase.getUid();
+                                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+                                ArrayList<String> users = new ArrayList<>();
+                                users.add(userId);
+
+                                Reservation_model restaurant = new Reservation_model(rep, m_tv_date.getText().toString(), m_tv_heure.getText().toString(), users);
+
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                String key = database.getReference("reservations").push().getKey();
+
+                                mDatabase.child("reservations").child(key).setValue(restaurant);
+
+
+                                Toast.makeText(getActivity(), "RESERVATION REUSSIE",
+                                        Toast.LENGTH_LONG).show();
+                                Recherche recherche = new Recherche();
+
+                                Bundle args = new Bundle();
+                                recherche.setArguments(args);
+
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                transaction.replace(R.id.dynamic_fragment_frame_layout, recherche);
+                                transaction.commit();
+
+
+                            }catch(Exception e){
+                                Toast.makeText(getActivity(), "ERREUR LORS DE LA RESERVATION! REESSAYER",
+                                        Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
+                                refreshitem();
+                            }
+                        }
                     }else{
                         Toast.makeText(getActivity(), "Veuillez sélectionner une date et un horaire précis",
                                 Toast.LENGTH_LONG).show();
                     }
-                }
             }
         });
 

@@ -62,27 +62,6 @@ public class Mes_reservations extends Base_fragment {
         View view=inflater.inflate(R.layout.activity_mes_reservations,view_group,false);
         m_lv=view.findViewById(R.id.activity_mes_reservations_list_view);
 
-    /*    if (savedInstanceState != null  ) {
-
-            Mes_reservations mes_reservations = new Mes_reservations();
-            Bundle args = new Bundle();
-            mes_reservations.setArguments(args);
-
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.dynamic_fragment_frame_layout, mes_reservations).commit();
-
-            list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
-
-            Log.d("h","LAAAAAAAAAAAAAAAAAAAAAAAA");
-            adapter= new Mes_reservations_adapter(getActivity(), R.layout.activity_mes_reservations_adapter,list_reservation);
-            m_lv.setAdapter(adapter);
-            if(list_reservation.size()==0)
-                Toast.makeText(getContext(), "Vous n'avez pas de réservations ",
-                        Toast.LENGTH_LONG).show();
-
-        }
-
-       else */
            read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -165,7 +144,7 @@ public class Mes_reservations extends Base_fragment {
                     e.printStackTrace();
             }
                 m_lv=getView().findViewById(R.id.activity_mes_reservations_list_view);
-                adapter= new Mes_reservations_adapter(getActivity(), R.layout.activity_mes_reservations_adapter,list_reservation);
+                adapter= new Mes_reservations_adapter(getActivity(), R.layout.activity_mes_reservations_adapter,list_reservation, Mes_reservations.this);
                 m_lv.setAdapter(adapter);
                 if(list_reservation.size()==0)
                 Toast.makeText(getContext(), "Vous n'avez pas de réservations ",
@@ -177,10 +156,6 @@ public class Mes_reservations extends Base_fragment {
 
             }
         });
-
-
-
-
     }
 
     @Override
@@ -198,10 +173,17 @@ public class Mes_reservations extends Base_fragment {
         return false;
     }
 
-  /*  @Override
-    public void onSaveInstanceState(Bundle outState) {
-       //outState.putSerializable("saved",list_reservation);
-        super.onSaveInstanceState(outState);
-    }*/
+    public void reload(Reservation_model key){
 
+      try{
+          list_reservation.remove(key);
+          adapter.notifyDataSetChanged();
+          Toast.makeText(getContext(), "Annulation réussite",
+                  Toast.LENGTH_LONG).show();
+      }catch (Exception e){
+          Toast.makeText(getContext(), "ERREUR LORS DE LA SUPPRESSION",
+                  Toast.LENGTH_LONG).show();
+      }
+
+    }
 }

@@ -23,21 +23,14 @@
             >
 
 
-            <ImageView
-                android:id="@+id/activity_users_adapter_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                />
 
             <TextView
                 android:id="@+id/activity_users_adapter_pseudo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/activity_users_adapter_image"
                 android:text="Pseudo"
                 android:textSize="25dp"
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:layout_marginLeft="30dp"
                 android:focusable="false"
@@ -48,7 +41,6 @@
                 android:id="@+id/activity_users_adapter_nom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/activity_users_adapter_image"
                 android:layout_below="@+id/activity_users_adapter_pseudo"
                 android:text="Nom"
                 android:textSize="20dp"
@@ -76,10 +68,10 @@
                 android:id="@+id/activity_users_adapter_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/activity_users_adapter_image"
                 android:layout_below="@+id/activity_users_adapter_prenom"
                 android:text="Age"
                 android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20dp"
                 android:focusable="false"

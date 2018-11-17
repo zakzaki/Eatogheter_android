@@ -74,6 +74,19 @@
         android:textStyle="bold"
         />
 
+    <Button
+        android:id="@+id/activity_profil_cnx_btn_pass"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_margin="30dp"
+        android:layout_below="@+id/activity_profil_cnx_btn"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/img_0001s_0001_btn"
+        android:text="Réinitialiser le mot de passe"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        />
+
 
 </RelativeLayout>
 

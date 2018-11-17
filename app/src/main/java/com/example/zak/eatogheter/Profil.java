@@ -1,5 +1,6 @@
 package com.example.zak.eatogheter;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
@@ -58,7 +59,7 @@ public class Profil extends Base_fragment {
 
 
         final EditText m_nom, m_prenom, m_age, m_pseudo;
-        final Button m_btn;
+        final Button m_btn, m_btn_pass;
 
 
         m_nom=view.findViewById(R.id.activity_profil_nom);
@@ -67,6 +68,7 @@ public class Profil extends Base_fragment {
         m_pseudo=view.findViewById(R.id.activity_profil_pseudo);
 
         m_btn=view.findViewById(R.id.activity_profil_cnx_btn);
+        m_btn_pass=view.findViewById(R.id.activity_profil_cnx_btn_pass);
 
       /*  if (savedInstanceState != null) {
 
@@ -84,23 +86,38 @@ public class Profil extends Base_fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser userFirebase = mAuth.getCurrentUser();
         String userId = userFirebase.getUid();
-        String mail=userFirebase.getEmail();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users").child(userId);
 
-    /*   mAuth.sendPasswordResetEmail(mail)
-               .addOnCompleteListener(new OnCompleteListener<Void>() {
-                   @Override
-                   public void onComplete(@NonNull Task<Void> task) {
 
-                       if (task.isSuccessful()) {
-                           Toast.makeText(getContext(), "Vérifiez votre messagerie",
-                                   Toast.LENGTH_LONG).show();
-                       }
+        m_btn_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseUser userFirebase = mAuth.getCurrentUser();
+                String mail=userFirebase.getEmail();
+                mAuth.sendPasswordResetEmail(mail)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
 
-                   }
-               });*/
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Vérifiez votre messagerie afin de réinitialiser le mot de passe",
+                                            Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "Déconnexion",
+                                            Toast.LENGTH_LONG).show();
+
+                                    FirebaseAuth.getInstance().signOut();
+                                    Intent intent = new Intent(getContext(), MainActivity.class);
+                                    startActivity(intent);
+
+                                }
+
+                            }
+                        });
+            }
+        });
+
 
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -110,13 +127,10 @@ public class Profil extends Base_fragment {
                     if (dataSnapshot != null) {
                         HashMap value = (HashMap) dataSnapshot.getValue();
 
-                        Log.d("hh","VALUUUEE "+value.toString());
-
                         if(value!=null){
-
                             m_nom.setText((String) value.get("nom"));
                             m_prenom.setText((String) value.get("prenom"));
-                            m_age.setText((String) value.get("prenom"));
+                            m_age.setText((String) value.get("age"));
                             m_pseudo.setText((String) value.get("pseudo"));
                             }
                     }

@@ -22,9 +22,11 @@ import Model.Reservation_model;
 
 public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
 
-   public Mes_reservations_adapter(@NonNull Context context, int ressource, @NonNull List<Reservation_model> object) {
-        super(context, ressource, object);
+    Mes_reservations mes_reservations;
 
+   public Mes_reservations_adapter(@NonNull Context context, int ressource, @NonNull List<Reservation_model> object, Mes_reservations fragment) {
+        super(context, ressource, object);
+        this.mes_reservations=fragment;
     }
 
     @NonNull
@@ -68,11 +70,7 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
                     }else{
                         mDatabase.child(res.getKey()).child("users").child(res.getKey_key()).removeValue();
                     }
-
-                    Toast.makeText(getContext(), "Annulation réussite, veuillez recharger la page",
-                            Toast.LENGTH_LONG).show();
-
-
+                    mes_reservations.reload(res);
                 }catch (Exception e){
                     e.printStackTrace();
                     Toast.makeText(getContext(), "ERREUR LORS DE LA SUPPRESSION",

@@ -6,7 +6,9 @@
     android:layout_height="176dp"
     android:background="#B2B9E1"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    >
 
     <ImageView
         android:id="@+id/imageView"

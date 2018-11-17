@@ -5,7 +5,9 @@
     android:id="@+id/activity_reserver_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Reserver">
+    tools:context=".Reserver"
+    android:background="@drawable/img_0000_layout"
+    >
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -16,7 +18,7 @@
         android:id="@+id/reserver_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Réserver un créneau"
+        android:text="Choisir un horaire"
         android:textSize="30dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="35dp"
@@ -28,7 +30,10 @@
         android:layout_width="49dp"
         android:layout_height="46dp"
         android:layout_below="@+id/reserver_txt"
-        android:layout_margin="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
         android:background="@drawable/ic_perm_contact_calendar_black_24dp" />
 
 
@@ -37,7 +42,10 @@
         android:layout_width="49dp"
         android:layout_height="46dp"
         android:layout_below="@+id/reserver_calandrier"
-        android:layout_margin="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
         android:background="@drawable/ic_access_time_black_24dp" />
 
 
@@ -48,7 +56,7 @@
         android:layout_below="@+id/reserver_txt"
         android:layout_toRightOf="@+id/reserver_calandrier"
         android:layout_marginTop="32dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginBottom="20dp"
         android:hint="Selectionner la date"
         android:textSize="25dp"
@@ -59,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/reserver_date_txt_view"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/reserver_heure"
         android:hint="Selectionner l'heure"
@@ -68,13 +76,16 @@
 
     <Button
         android:id="@+id/reserver_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/reserver_heure_txt_view"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
         android:layout_marginTop="60dp"
-        android:text="Créer un RDV" />
+        android:text="Créer un RDV"
+        android:background="@drawable/img_0001s_0001_btn"
+        android:layout_width="211dp"
+        android:layout_height="49dp"
+        android:textColor="#FFFFFF"
+        />
 
 </RelativeLayout>
 

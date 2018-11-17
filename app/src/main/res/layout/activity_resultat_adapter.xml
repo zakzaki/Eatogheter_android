@@ -19,26 +19,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         >
-
-
-        <ImageView
-            android:id="@+id/activity_resultat_adapter_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            />
 
         <TextView
             android:id="@+id/activity_resultat_adapter_nom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/activity_resultat_adapter_image"
             android:text="Nom Resto"
             android:textSize="25dp"
             android:textStyle="bold"
+            android:layout_margin="10dp"
             android:focusable="false"
             android:focusableInTouchMode="false"
             />
@@ -47,18 +37,19 @@
             android:id="@+id/activity_resultat_adapter_adress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/activity_resultat_adapter_image"
             android:layout_below="@+id/activity_resultat_adapter_nom"
             android:text="Adress Resto"
+            android:layout_marginLeft="10dp"
             android:focusable="false"
             android:focusableInTouchMode="false"/>
+
         <TextView
             android:id="@+id/activity_resultat_adapter_categorie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/activity_resultat_adapter_image"
             android:layout_below="@+id/activity_resultat_adapter_adress"
             android:text="Categorie Resto"
+            android:layout_margin="10dp"
             android:focusable="false"
             android:focusableInTouchMode="false"
             />

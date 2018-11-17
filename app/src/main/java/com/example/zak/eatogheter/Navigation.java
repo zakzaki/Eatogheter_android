@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -30,16 +32,13 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-
-
         this.configureToolBar();
         this.configureDrawerLayout();
         this.configureNavigationView();
 
         Recherche res = new Recherche();
 
-
-       fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.dynamic_fragment_frame_layout, res).commit();
     }
 
@@ -125,18 +124,23 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
     @Override
     public void onBackPressed()
     {
-        drawerLayout.closeDrawers();
-        List fragmentList = getSupportFragmentManager().getFragments();
+        if(!drawerLayout.isDrawerOpen(GravityCompat.START)) {
 
-        boolean handled =false;
-        for(Object f : fragmentList) {
-            if(f instanceof Base_fragment) {
-                handled = ((Base_fragment)f).onBackPressed();
+            drawerLayout.closeDrawers();
+            List fragmentList = getSupportFragmentManager().getFragments();
 
-                if(handled) {
-                    break;
+            boolean handled = false;
+            for (Object f : fragmentList) {
+                if (f instanceof Base_fragment) {
+                    handled = ((Base_fragment) f).onBackPressed();
+
+                    if (handled) {
+                        break;
+                    }
                 }
             }
+        }else{
+            drawerLayout.closeDrawers();
         }
     }
 }
