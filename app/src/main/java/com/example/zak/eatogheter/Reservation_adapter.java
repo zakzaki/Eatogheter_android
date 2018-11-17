@@ -42,7 +42,7 @@ public class Reservation_adapter extends ArrayAdapter<Reservation_model> {
         }
 
         final TextView m_nom, m_adresse, m_date, m_heure;
-        final Button m_rejoindre_btn, m_voir_btn;
+        final Button m_rejoindre_btn;
 
         m_nom=convertView.findViewById(R.id.activity_reservation_adapter_nom);
         m_adresse=convertView.findViewById(R.id.activity_reservation_adapter_adress);

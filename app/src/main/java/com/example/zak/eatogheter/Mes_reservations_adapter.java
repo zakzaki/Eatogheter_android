@@ -1,6 +1,7 @@
 package com.example.zak.eatogheter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +33,7 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -39,7 +41,7 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
         }
 
         final TextView m_nom, m_adresse, m_date, m_heure;
-        final Button m_supprimer;
+        final ImageButton m_supprimer;
 
         m_nom=convertView.findViewById(R.id.activity_mes_reservation_adapter_nom);
         m_adresse=convertView.findViewById(R.id.activity_mes_reservation_adapter_adress);
