@@ -50,7 +50,7 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
 
         // 4 - Handle Navigation Item Click
         int id = item.getItemId();
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+      //  android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         switch (id){
             case R.id.activity_main_drawer_news :
                Recherche recherche = new Recherche();
@@ -125,15 +125,12 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
     @Override
     public void onBackPressed()
     {
-
-        Log.d("HH","RETOUUUUUUUUUUR 1");
         drawerLayout.closeDrawers();
         List fragmentList = getSupportFragmentManager().getFragments();
 
-        boolean handled = false;
+        boolean handled =false;
         for(Object f : fragmentList) {
             if(f instanceof Base_fragment) {
-                Log.d("HH","RETOUUUUUUUUUUR OUI");
                 handled = ((Base_fragment)f).onBackPressed();
 
                 if(handled) {
@@ -141,9 +138,5 @@ public class Navigation extends AppCompatActivity implements  NavigationView.OnN
                 }
             }
         }
-      /*  if(!handled) {
-            Log.d("HH","RETOUUUUUUUUUUR NON");
-            super.onBackPressed();
-        }*/
     }
 }

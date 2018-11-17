@@ -38,7 +38,7 @@ public class Reserver extends Base_fragment{
 
     DatePickerDialog.OnDateSetListener m_date;
     TimePickerDialog.OnTimeSetListener m_heure;
-    Button m_btn, m_btn_date, m_btn_heure;
+    Button m_btn;
     TextView m_tv_date, m_tv_heure;
     private ImageButton date_dialog_button = null,heure_dialog_button=null;
     String TAG="D";
@@ -53,25 +53,12 @@ public class Reserver extends Base_fragment{
 
 
         m_btn = view.findViewById(R.id.reserver_btn);
-     //   m_btn_date = view.findViewById(R.id.reserver_btn_date);
-      //  m_btn_heure = view.findViewById(R.id.reserver_btn_heure);
 
         m_tv_date = view.findViewById(R.id.reserver_date_txt_view);
         m_tv_heure = view.findViewById(R.id.reserver_heure_txt_view);
 
         date_dialog_button = view.findViewById(R.id.reserver_calandrier);
         heure_dialog_button=view.findViewById(R.id.reserver_heure);
-
-        if (savedInstanceState != null ) {
-
-            Reserver reservation = new Reserver();
-            Bundle args = new Bundle();
-            reservation.setArguments(args);
-
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.dynamic_fragment_frame_layout, reservation).commit();
-
-        }
 
 
         date_dialog_button.setOnClickListener(new View.OnClickListener() {
@@ -132,52 +119,26 @@ public class Reserver extends Base_fragment{
 
                 try{
                     day=Integer.parseInt(date.substring(0,2));
-                    Log.d("h","DAY "+day);
-
 
                     try{
                         month=Integer.parseInt(date.substring(3,5));
-                        Log.d("h","MONTH "+month);
-
                         year=Integer.parseInt(date.substring(6,10));
-                        Log.d("h","YEAR "+year);
                     }catch (NumberFormatException e){
-
                         month=Integer.parseInt(date.substring(3,4));
-                        Log.d("h","MONTH "+month);
-
                         year=Integer.parseInt(date.substring(5,9));
-                        Log.d("h","YEAR "+year);
-
                     }
-
                 }catch (NumberFormatException e){
                     day=Integer.parseInt(date.substring(0,1));
-                    Log.d("h","DAY "+day);
-
                     try{
-
                         month=Integer.parseInt(date.substring(2,4));
-                        Log.d("h","MONTH "+month);
-
                         year=Integer.parseInt(date.substring(5,9));
-                        Log.d("h","YEAR "+year);
-
-
                     }catch (NumberFormatException e2){
-
                         month=Integer.parseInt(date.substring(2,3));
-                        Log.d("h","MONTH "+month);
-
                         year=Integer.parseInt(date.substring(4,8));
-                        Log.d("h","YEAR "+year);
-
                     }
                 }
-
                 month--;
                 String heure=m_tv_heure.getText().toString();
-
 
                 try{
                     hour=Integer.parseInt(heure.substring(0,2));
@@ -197,15 +158,9 @@ public class Reserver extends Base_fragment{
                         minute=Integer.parseInt(heure.substring(2,heure.length()));
                     }
                 }
-
-
                 Calendar validDate = Calendar.getInstance();
                 validDate.set(year, month, day,hour,minute);
-
                 Calendar currentDate = Calendar.getInstance();
-
-                Log.d("h","DATE LYOUM "+currentDate.toString());
-
                 if (currentDate.after(validDate)) {
 
                     Toast.makeText(getActivity(), "Veuillez sélectionner une date et un horaire supérieur à celle d'auhourd'hui ",
@@ -223,7 +178,6 @@ public class Reserver extends Base_fragment{
                             FirebaseUser userFirebase = mAuth.getCurrentUser();
 
                             String userId = userFirebase.getUid();
-                            Log.d(TAG, "LE USER ID EST " + userId);
                             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
                             ArrayList<String> users = new ArrayList<>();
@@ -234,7 +188,6 @@ public class Reserver extends Base_fragment{
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             String key = database.getReference("reservations").push().getKey();
 
-                            Log.d(TAG, "LA KEEEEEEY EST " + key);
                             mDatabase.child("reservations").child(key).setValue(restaurant);
 
 
@@ -276,7 +229,6 @@ public class Reserver extends Base_fragment{
     @Override
     public boolean onBackPressed() {
 
-        Log.d("HH","RETOUUUUUUUUUUR RES");
         Resultat resultat=new Resultat();
 
         Bundle args = new Bundle();
@@ -289,10 +241,5 @@ public class Reserver extends Base_fragment{
         return false;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        //  outState.putSerializable("saved",list_reservation);
-        super.onSaveInstanceState(outState);
-    }
 
 }

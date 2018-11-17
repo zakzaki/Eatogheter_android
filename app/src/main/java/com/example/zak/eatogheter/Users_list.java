@@ -44,8 +44,6 @@ public class Users_list extends Base_fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
 
-
-
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -70,7 +68,6 @@ public class Users_list extends Base_fragment {
                                     User u=new User(key, (String)postValues.get("nom"),(String)postValues.get("prenom"),(String)postValues.get("age") ,(String)postValues.get("pseudo"));
                                     list_users.add(u);
                                 }
-
                             }
                         }
                     }
@@ -94,28 +91,22 @@ public class Users_list extends Base_fragment {
     @Override
     public boolean onBackPressed() {
       //  super.onBackPressed();
-       Log.d("HH","RETOUUUUUUUUUUR");
-
         Bundle args = new Bundle();
+        FragmentTransaction transaction;
 
        if(provenance.equals("mes_reservations")) {
-           Log.d("HH","RETOUUUUUUUUUUR MES RESER");
            Mes_reservations r = new Mes_reservations();
            r.setArguments(args);
-           FragmentTransaction transaction = getFragmentManager().beginTransaction();
+           transaction = getFragmentManager().beginTransaction();
            transaction.replace(R.id.dynamic_fragment_frame_layout, r).commit();
        }
 
        else {
-           Log.d("HH","RETOUUUUUUUUUUR RESER");
            Reservation r = new Reservation();
            r.setArguments(args);
-           FragmentTransaction transaction = getFragmentManager().beginTransaction();
+           transaction = getFragmentManager().beginTransaction();
            transaction.replace(R.id.dynamic_fragment_frame_layout, r).commit();
        }
-
-
         return false;
     }
-
 }

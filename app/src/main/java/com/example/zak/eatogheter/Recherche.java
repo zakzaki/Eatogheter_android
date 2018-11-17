@@ -43,12 +43,6 @@ public class Recherche extends Base_fragment{
     final static String version = "20181002";
     final static String url  ="https://api.foursquare.com/v2/venues/search?client_id="+idkey+"&client_secret="+appkey+"&v="+version+"";
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {

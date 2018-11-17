@@ -27,11 +27,30 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String TAG="D";
 
+  //  public SharedPreferences sharedPreferences;
+  //  public SharedPreferences.Editor data_editor;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+     /*   Log.d("h","PREFFF = "+getString(R.string.pref_logged));
+        boolean logged;
+       try{
+            logged = sharedPreferences.getBoolean(getString(R.string.pref_logged), false);
+           }catch (Exception e){
+            logged=false;
+        }
+
+        Log.d("h","LOGGED = "+logged);
+        if (logged) {
+            Intent i = new Intent(MainActivity.this, Navigation.class);
+            startActivity(i);
+            finish();
+        }*/
 
         m_login=findViewById(R.id.activity_main_login_txt);
         m_pass=findViewById(R.id.activity_main_password_txt);
@@ -73,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-      //  updateUI(currentUser);
+        updateUI(currentUser);
     }
 
     private void signIn(String email, String password) {
@@ -85,13 +104,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-
+                          //  data_editor.putBoolean(getString(R.string.pref_logged), Boolean.TRUE);
+                          //  data_editor.apply();
                             // La c'est bon la connexion est établie
                             Log.d(TAG, "signInWithEmail:success");
-                            //ici tu peut résuperer ton utilisateur dans une instance de FirebaseUser
-                            FirebaseUser user = mAuth.getCurrentUser();
 
-                            // la par exemple je vais vers une autre activité qui est celle du profil
                               Intent intent = new Intent(MainActivity.this, Navigation.class);
                               startActivity(intent);
                         } else {

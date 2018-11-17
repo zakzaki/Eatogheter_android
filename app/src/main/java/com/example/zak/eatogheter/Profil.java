@@ -68,7 +68,7 @@ public class Profil extends Base_fragment {
 
         m_btn=view.findViewById(R.id.activity_profil_cnx_btn);
 
-        if (savedInstanceState != null) {
+      /*  if (savedInstanceState != null) {
 
             Profil profil = new Profil();
             Bundle args = new Bundle();
@@ -77,7 +77,7 @@ public class Profil extends Base_fragment {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.dynamic_fragment_frame_layout, profil).commit();
 
-        }
+        }*/
 
         /**********************************/
 
@@ -200,10 +200,10 @@ public class Profil extends Base_fragment {
         return false;
     }
 
-    @Override
+ /*   @Override
     public void onSaveInstanceState(Bundle outState) {
         //outState.putParcelableArrayList("key", my_books_list);
         super.onSaveInstanceState(outState);
-    }
+    }*/
 
 }

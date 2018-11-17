@@ -46,7 +46,7 @@ public class Reservation extends Base_fragment {
         View view=inflater.inflate(R.layout.activity_reservation,view_group,false);
         m_lv=view.findViewById(R.id.activity_reservation_list_view);
 
-        if (savedInstanceState != null ) {
+      /*  if (savedInstanceState != null ) {
 
             Reservation reservation = new Reservation();
             Bundle args = new Bundle();
@@ -56,7 +56,8 @@ public class Reservation extends Base_fragment {
             transaction.replace(R.id.dynamic_fragment_frame_layout, reservation).commit();
 
         }
-       else read_reservation();
+       else*/
+           read_reservation();
 
         m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -219,11 +220,11 @@ return  view;
         return false;
     }
 
-    @Override
+ /*   @Override
     public void onSaveInstanceState(Bundle outState) {
         //  outState.putSerializable("saved",list_reservation);
         super.onSaveInstanceState(outState);
-    }
+    }*/
 
 
 }

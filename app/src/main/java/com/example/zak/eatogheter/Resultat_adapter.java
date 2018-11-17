@@ -28,13 +28,9 @@ import Model.Reponse_requete;
 
 public class Resultat_adapter extends ArrayAdapter<Reponse_requete> implements  View.OnClickListener{
 
- private Context context;
 
     public Resultat_adapter(@NonNull Context context, @NonNull List<Reponse_requete> object){
         super(context,R.layout.activity_resultat_adapter ,object);
-        this.context=context;
-
-
     }
 
     @NonNull
@@ -49,39 +45,19 @@ public class Resultat_adapter extends ArrayAdapter<Reponse_requete> implements  
 
         final TextView m_nom,m_adress,m_cat;
         final ImageView m_img;
-      //  final ImageButton m_btn;
+
 
         m_nom=convertView.findViewById(R.id.activity_resultat_adapter_nom);
         m_adress=convertView.findViewById(R.id.activity_resultat_adapter_adress);
         m_cat=convertView.findViewById(R.id.activity_resultat_adapter_categorie);
-      //  m_btn=convertView.findViewById(R.id.result_adapter_btn);
-
-
 
         final Reponse_requete rep_req=getItem(position);
-
 
         m_nom.setText(rep_req.getNom());
         m_adress.setText(rep_req.getAdresse());
         m_cat.setText(rep_req.getCategorie());
 
-      /*  m_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Log.d("LOG","JE SUIIISSSS ADDAPTEEERRRRA ");
-
-               Intent intent = new Intent(context, Reserver.class);
-                intent.putExtra("resto",rep_req);
-                context.startActivity(intent);
-
-
-
-            }
-        });*/
-
         return convertView;
-
     }
 
     @Override
@@ -99,6 +75,4 @@ public class Resultat_adapter extends ArrayAdapter<Reponse_requete> implements  
                 break;
         }
     }
-
-
 }

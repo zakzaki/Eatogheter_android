@@ -23,19 +23,13 @@ public class Resultat extends Base_fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
 
-
-
-
         View view=inflater.inflate(R.layout.activity_resultat,view_group,false);
 
         final ArrayList<Reponse_requete>resultat;
-    //    resultat= (ArrayList<Reponse_requete>) getArguments().getSerializable("resultat");
 
         if((ArrayList<Reponse_requete>) getArguments().getSerializable("resultat")!=null)
             resultat=(ArrayList<Reponse_requete>) getArguments().getSerializable("resultat");
         else  resultat= (ArrayList<Reponse_requete>) getArguments().getSerializable("retour_resultat");
-
-        Log.d("h","RESULTAAAAAAAAT == "+resultat.toString());
 
         adapter = new Resultat_adapter(getActivity(),resultat);
         m_lv=view.findViewById(R.id.activity_resultat_list_view);
@@ -68,7 +62,6 @@ return view;
     @Override
     public boolean onBackPressed() {
 
-        Log.d("HH","RETOUUUUUUUUUUR RES");
         Recherche recherche=new Recherche();
 
         Bundle args = new Bundle();

@@ -35,13 +35,13 @@ public class Mes_reservations extends Base_fragment {
     private Mes_reservations_adapter adapter;
     ArrayList<Reservation_model> list_reservation = new ArrayList<>();
 
-    @Override
+  /*  @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null  ) {
 
-       
+
             list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
             m_lv=getView().findViewById(R.id.activity_mes_reservations_list_view);
             Log.d("h","LAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -52,7 +52,7 @@ public class Mes_reservations extends Base_fragment {
                         Toast.LENGTH_LONG).show();
 
         }
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
@@ -198,10 +198,10 @@ public class Mes_reservations extends Base_fragment {
         return false;
     }
 
-    @Override
+  /*  @Override
     public void onSaveInstanceState(Bundle outState) {
-       outState.putSerializable("saved",list_reservation);
+       //outState.putSerializable("saved",list_reservation);
         super.onSaveInstanceState(outState);
-    }
+    }*/
 
 }
