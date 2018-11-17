@@ -101,7 +101,7 @@ public class Inscription extends AppCompatActivity {
 
                                                 Intent intent = new Intent(Inscription.this, MainActivity.class);
                                                 startActivity(intent);
-
+                                                finish();
                                             }catch (Exception e){
                                                 Toast.makeText(Inscription.this, "ERREUR LORS DE L'INSCRIPTION",
                                                         Toast.LENGTH_LONG).show();
