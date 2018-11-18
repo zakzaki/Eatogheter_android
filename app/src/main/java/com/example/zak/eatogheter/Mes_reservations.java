@@ -3,11 +3,9 @@ package com.example.zak.eatogheter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,24 +33,6 @@ public class Mes_reservations extends Base_fragment {
     private Mes_reservations_adapter adapter;
     ArrayList<Reservation_model> list_reservation = new ArrayList<>();
 
-  /*  @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (savedInstanceState != null  ) {
-
-
-            list_reservation= (ArrayList<Reservation_model>) savedInstanceState.getSerializable("saved");
-            m_lv=getView().findViewById(R.id.activity_mes_reservations_list_view);
-            Log.d("h","LAAAAAAAAAAAAAAAAAAAAAAAA");
-            adapter= new Mes_reservations_adapter(getActivity(), R.layout.activity_mes_reservations_adapter,list_reservation);
-            m_lv.setAdapter(adapter);
-            if(list_reservation.size()==0)
-                Toast.makeText(getContext(), "Vous n'avez pas de réservations ",
-                        Toast.LENGTH_LONG).show();
-
-        }
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup view_group, Bundle savedInstanceState) {
@@ -64,25 +44,21 @@ public class Mes_reservations extends Base_fragment {
 
            read_reservation();
 
-        m_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Reservation_model reservation_model=(Reservation_model)parent.getItemAtPosition(position);
-
-                Users_list users_list=new Users_list();
-
-                Bundle args = new Bundle();
-                args.putSerializable("users", reservation_model.getUsers());
-                args.putString("provenance","mes_reservations");
-                users_list.setArguments(args);
-
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.dynamic_fragment_frame_layout, users_list);
-                transaction.commit();
-            }
-        });
-
         return view;
+    }
+
+    public void show_users(Reservation_model reservation_model){
+
+        Users_list users_list=new Users_list();
+
+        Bundle args = new Bundle();
+        args.putSerializable("users", reservation_model.getUsers());
+        args.putString("provenance","mes_reservations");
+        users_list.setArguments(args);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.dynamic_fragment_frame_layout, users_list);
+        transaction.commit();
     }
 
     private void read_reservation(){

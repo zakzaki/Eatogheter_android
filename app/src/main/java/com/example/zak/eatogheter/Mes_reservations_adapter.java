@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +43,7 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
 
         final TextView m_nom, m_adresse, m_date, m_heure;
         final ImageButton m_supprimer;
+        final RelativeLayout r;
 
         m_nom=convertView.findViewById(R.id.activity_mes_reservation_adapter_nom);
         m_adresse=convertView.findViewById(R.id.activity_mes_reservation_adapter_adress);
@@ -49,6 +51,7 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
         m_heure=convertView.findViewById(R.id.activity_mes_reservation_adapter_heure);
 
         m_supprimer=convertView.findViewById(R.id.mes_reservation_adapter_btn_supprimer);
+        r=convertView.findViewById(R.id.mes_reservation_relative);
 
         final Reservation_model res=getItem(position);
 
@@ -56,7 +59,6 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
         m_adresse.setText(res.getR().getAdresse());
         m_date.setText(res.getDate());
         m_heure.setText(res.getHeure());
-
 
         m_supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +83,16 @@ public class Mes_reservations_adapter extends ArrayAdapter<Reservation_model> {
             }
         });
 
+
+        r.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mes_reservations.show_users(res);
+            }
+        });
+
+
         return convertView;
     }
+
 }
